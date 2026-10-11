@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Art Class</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #1a1a1a; color: #fff; text-align: center; padding: 50px; }
+        .box { background: #2a2a2a; padding: 30px; border-radius: 10px; display: inline-block; min-width: 320px; box-shadow: 0px 4px 10px rgba(0,0,0,0.5); }
+        input[type="email"], input[type="submit"] { padding: 12px; margin: 10px 0; width: 90%; border-radius: 5px; border: none; box-sizing: border-box; }
+        input[type="submit"] { background: #28a745; color: white; font-weight: bold; cursor: pointer; }
+        .error { color: #ff4d4d; font-weight: bold; background: rgba(255,77,77,0.1); padding: 10px; border-radius: 5px; }
+        .admin-panel { margin-top: 40px; border-top: 2px dashed #444; padding-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <% if (!verContenido) { %>
+            <h2>Verificación de Estudiante</h2>
+            <form action="/acceder" method="POST">
+                <input type="email" name="email" placeholder="tu-correo@gmail.com" required>
+                <input type="submit" value="Entrar">
+            </form>
+            <% if (mensaje) { %><p class="error"><%= mensaje %></p><% } %>
+        <% } else { %>
+            <h2>Contenido de Art Class</h2>
+            <iframe src="https://ejemplo.com" width="100%" height="500px" style="border:none;"></iframe>
+        <% } %>
+        <div class="admin-panel">
+            <h3>Panel de Expulsión</h3>
+            <form action="/bloquear-correo" method="POST">
+                <input type="email" name="emailAdmin" placeholder="Correo a expulsar" required>
+                <input type="submit" value="Bloquear" style="background:#dc3545;">
+            </center>
+        </div>
+    </div>
+</body>
+</html>
