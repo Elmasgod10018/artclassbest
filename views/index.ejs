@@ -8,35 +8,36 @@
         body { font-family: Arial, sans-serif; background: #121212; color: #fff; text-align: center; margin: 0; padding: 0; overflow-x: hidden; }
         .top-bar { background: #0000ff; color: white; padding: 10px; font-weight: bold; font-size: 14px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
         .container { padding: 40px 20px; }
-        .box { background: #1e1e1e; padding: 30px; border-radius: 15px; display: inline-block; min-width: 400px; box-shadow: 0px 10px 25px rgba(0,0,0,0.7); border: 1px solid #333; position: relative; }
+        .box { background: #1e1e1e; padding: 30px; border-radius: 15px; display: inline-block; min-width: 450px; width: 90%; max-width: 900px; box-shadow: 0px 10px 25px rgba(0,0,0,0.7); border: 1px solid #333; position: relative; box-sizing: border-box; }
         .title-main { color: #00bcff; font-size: 28px; margin-bottom: 5px; font-weight: bold; text-shadow: 0 0 10px rgba(0,188,255,0.3); }
         .badge { background: #fff; color: #000; font-weight: bold; padding: 3px 8px; border-radius: 5px; font-size: 12px; vertical-align: middle; }
         
-        input[type="email"], input[type="text"], input[type="submit"], select { padding: 14px; margin: 10px 0; width: 95%; border-radius: 8px; border: 1px solid #444; background: #252525; color: white; box-sizing: border-box; font-size: 14px; }
+        input[type="email"], input[type="submit"], select { padding: 14px; margin: 10px 0; width: 95%; border-radius: 8px; border: 1px solid #444; background: #252525; color: white; box-sizing: border-box; font-size: 14px; }
         input[type="submit"] { background: #00e676; color: black; font-weight: bold; cursor: pointer; border: none; transition: 0.2s; }
-        input[type="submit"]:hover { background: #00c853; }
         
-        .btn-magic { background: #007bff; color: white; padding: 14px; border-radius: 8px; text-decoration: none; display: inline-block; font-weight: bold; margin: 8px 0; width: 95%; cursor: pointer; border: none; font-size: 14px; transition: 0.2s; }
-        .btn-magic:hover { opacity: 0.9; }
-        .btn-youtube { background: #ff0000; }
-        .btn-roblox { background: #28a745; }
+        .btn-magic { background: #007bff; color: white; padding: 14px; border-radius: 8px; text-decoration: none; display: inline-block; font-weight: bold; margin: 8px 0; width: 95%; cursor: pointer; border: none; font-size: 14px; }
         
-        .search-box-container { margin: 20px 0; background: #252525; padding: 15px; border-radius: 10px; border: 1px solid #444; }
+        /* Zona del catálogo de videojuegos */
+        .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px; margin: 20px 0; padding: 10px; }
+        .game-card { background: #252525; padding: 15px; border-radius: 10px; border: 1px solid #444; cursor: pointer; font-weight: bold; transition: 0.2s; font-size: 14px; }
+        .game-card:hover { background: #00bcff; color: black; border-color: #00bcff; }
+        
         .frame-wrapper { margin-top: 25px; border: 3px solid #333; border-radius: 12px; background: #000; overflow: hidden; position: relative; }
-        iframe { width: 100%; height: 650px; border: none; background: #fff; }
+        iframe { width: 100%; height: 600px; border: none; background: #000; }
         
         .admin-panel { margin-top: 40px; border-top: 2px dashed #444; padding-top: 20px; background: #1a1a1a; padding: 20px; border-radius: 8px; text-align: left; }
     </style>
     <script>
-        function cambiarContenido(url) {
+        function cargarContenido(url) {
             var frame = document.getElementById('game-frame');
             frame.src = url;
+            frame.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // NUEVO SISTEMA ANTI-BLOQUEO: Evita el error abriendo la URL del proxy directamente de forma segura
-        function abrirAboutBlankGoogle() {
-            var urlDestino = "https://duckduckgo.com";
-            var win = window.open('', '_blank');
+        // Sistema alternativo compatible para abrir en una ventana oculta limpia
+        function abrirAboutBlank() {
+            var destino = window.location.origin;
+            var win = window.open('about:blank', '_blank');
             if (win) {
                 win.document.open();
                 win.document.write(`
@@ -45,19 +46,14 @@
                     <head>
                         <title>Inici - Classroom</title>
                         <link rel="icon" type="image/x-icon" href="https://gstatic.com">
-                        <style>
-                            html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #121212; }
-                            iframe { border: none; width: 100%; height: 100%; margin: 0; padding: 0; }
-                        </style>
+                        <style>html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;}iframe{border:none;width:100%;height:100%;}</style>
                     </head>
-                    <body>
-                        <iframe src="${urlDestino}"></iframe>
-                    </body>
+                    <body><iframe src="${destino}"></iframe></body>
                     </html>
                 `);
                 win.document.close();
             } else {
-                alert("Por favor, permite las ventanas emergentes en tu navegador para usar el modo invisible.");
+                alert("Por favor habilita las ventanas emergentes del navegador.");
             }
         }
     </script>
@@ -65,17 +61,14 @@
 <body>
 
     <div class="top-bar">
-        [10/16/2026] Transport settings have been fixed and the styling has been improved. Website not working/blocked? Join Discord! <span style="cursor:pointer;color:red;margin-left:10px;">[Close]</span>
+        [10/16/2026] Transport settings have been fixed and the styling has been improved. Website not working/blocked? Join Discord!
     </div>
 
     <div class="container">
         <div class="box">
             <% if (!verContenido) { %>
                 <div class="title-main">Welcome to Art Class Enhanced <span class="badge">early access!</span></div>
-                <div class="subtext">
-                    It has been 2 years since the development of Art Class Enhanced started.<br>
-                    <strong>Be responsible. (Use during free time or with permission from your teacher.)</strong>
-                </div>
+                <div class="subtext">It has been 2 years since the development of Art Class Enhanced started.</div>
 
                 <form action="/acceder" method="POST">
                     <input type="email" name="email" placeholder="Introduce tu correo estudiantil para iniciar..." required>
@@ -85,25 +78,28 @@
             <% } else { %>
                 <div class="title-main">Art Class Enhanced <span class="badge">Live</span></div>
                 
-                <!-- BOTÓN MÁGICO CORREGIDO -->
-                <button class="btn-magic" onclick="abrirAboutBlankGoogle()">🔍 Open Google Invisible (about:blank)</button>
-                
-                <!-- NUEVO BOTÓN DE YOUTUBE DESBLOQUEADO (Carga un motor limpio de vídeos incrustables) -->
-                <button class="btn-magic btn-youtube" onclick="cambiarContenido('https://youtube.com')">📺 Abrir YouTube Desbloqueado</button>
-                
-                <!-- ENLACE DE JUEGOS REPARADO DIRECTO A LA PLATAFORMA -->
-                <button class="btn-magic btn-roblox" onclick="cambiarContenido('https://googleusercontent.com')">🎮 Cargar Juegos Desbloqueados</button>
+                <button class="btn-magic" onclick="abrirAboutBlank()">🚀 Open in About:Blank (Modo Oculto)</button>
 
-                <div class="search-box-container">
-                    <form action="https://duckduckgo.com" method="POST" target="search-frame">
-                        <input type="text" name="q" placeholder="Busca vídeos o páginas de forma anónima aquí..." required>
-                        <input type="submit" value="Buscar seguro" style="background:#4285f4; color:white;">
-                    </form>
+                <!-- SECCIÓN DE VIDEOJUEGOS DIRECTOS DESBLOQUEADOS -->
+                <h3 style="color: #00bcff; margin-top: 20px; border-bottom: 1px solid #333; padding-bottom: 5px;">🎮 CATÁLOGO DE VIDEOJUEGOS</h3>
+                <div class="games-grid">
+                    <div class="game-card" onclick="cargarContenido('https://googleusercontent.com')">Friv Games</div>
+                    <div class="game-card" onclick="cargarContenido('https://freeorion.org')">Roblox Clone</div>
+                    <div class="game-card" onclick="cargarContenido('https://github.io')">8 Ball Pool</div>
+                    <div class="game-card" onclick="cargarContenido('https://voxiom.io')">Among Us Style</div>
+                    <div class="game-card" onclick="cargarContenido('https://bitlifeonline.com')">BitLife</div>
+                </div>
+
+                <!-- SECCIÓN DE MULTIMEDIA Y BUSCADOR -->
+                <h3 style="color: #ff0000; margin-top: 25px; border-bottom: 1px solid #333; padding-bottom: 5px;">📺 MULTIMEDIA DESBLOQUEADA</h3>
+                <div class="games-grid" style="grid-template-columns: 1fr;">
+                    <!-- Reproductor incrustable limpio que no activa bloqueos -->
+                    <div class="game-card" style="background: #ff0000; color: white;" onclick="cargarContenido('https://youtube.com')">Abrir Reproductor YouTube Libre</div>
                 </div>
 
                 <div class="frame-wrapper">
-                    <!-- Ahora por defecto muestra un visor de vídeo funcional -->
-                    <iframe id="game-frame" name="search-frame" src="https://googleusercontent.com" allowfullscreen></iframe>
+                    <!-- Marco interactivo donde se cargará el juego o vídeo seleccionado -->
+                    <iframe id="game-frame" src="https://googleusercontent.com" allowfullscreen></iframe>
                 </div>
 
                 <% if (esAdmin) { %>
