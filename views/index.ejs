@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Google Classroom</title>
+    <title>Inici - Classroom</title>
     <link rel="icon" type="image/x-icon" href="https://gstatic.com">
     <style>
         body { font-family: Arial, sans-serif; background: #121212; color: #fff; text-align: center; margin: 0; padding: 0; overflow-x: hidden; }
@@ -35,7 +35,7 @@
             frame.src = url;
         }
 
-        // CONTROL ABSOLUTO DEL HISTORIAL: Abre una ventana limpia y escribe el documento desde cero
+        // Abre una pestaña limpia sin provocar bloqueos del navegador de la escuela
         function abrirAboutBlankGoogle() {
             var win = window.open('about:blank', '_blank');
             if (win) {
@@ -44,7 +44,7 @@
                     <!DOCTYPE html>
                     <html>
                     <head>
-                        <title>Google Classroom</title>
+                        <title>Inici - Classroom</title>
                         <link rel="icon" type="image/x-icon" href="https://gstatic.com">
                         <style>
                             html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #fff; }
@@ -52,7 +52,8 @@
                         </style>
                     </head>
                     <body>
-                        <iframe src="https://google.com"></iframe>
+                        <!-- Buscador alternativo desbloqueado que sí permite iframes -->
+                        <iframe src="https://bing.com"></iframe>
                     </body>
                     </html>
                 `);
@@ -89,7 +90,8 @@
                 <button class="btn-magic btn-roblox" onclick="cambiarContenido('https://github.io')">🎮 Cargar Catálogo de Juegos Desbloqueados</button>
 
                 <div class="frame-wrapper">
-                    <iframe id="game-frame" src="https://google.com" allowfullscreen></iframe>
+                    <!-- Buscador desbloqueado embebible -->
+                    <iframe id="game-frame" src="https://bing.com" allowfullscreen></iframe>
                 </div>
 
                 <% if (esAdmin) { %>
