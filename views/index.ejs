@@ -15,10 +15,8 @@
         input[type="email"], input[type="submit"], select { padding: 14px; margin: 10px 0; width: 95%; border-radius: 8px; border: 1px solid #444; background: #252525; color: white; box-sizing: border-box; font-size: 14px; }
         input[type="submit"] { background: #00e676; color: black; font-weight: bold; cursor: pointer; border: none; transition: 0.2s; }
         
-        .btn-magic { background: #007bff; color: white; padding: 14px; border-radius: 8px; text-decoration: none; display: inline-block; font-weight: bold; margin: 8px 0; width: 95%; cursor: pointer; border: none; font-size: 14px; }
-        
         .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; margin: 20px 0; padding: 10px; }
-        .game-card { background: #252525; padding: 15px; border-radius: 10px; border: 1px solid #444; cursor: pointer; font-weight: bold; transition: 0.2s; font-size: 14px; display: flex; align-items: center; justify-content: center; min-height: 50px; color: white; text-decoration: none; }
+        .game-card { background: #252525; padding: 15px; border-radius: 10px; border: 1px solid #444; cursor: pointer; font-weight: bold; transition: 0.2s; font-size: 14px; display: flex; align-items: center; justify-content: center; min-height: 50px; color: white; }
         .game-card:hover { background: #00bcff; color: black; border-color: #00bcff; }
         
         .frame-wrapper { margin-top: 25px; border: 3px solid #333; border-radius: 12px; background: #000; overflow: hidden; position: relative; }
@@ -33,21 +31,36 @@
             frame.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // CAMUFLAJE TOTAL EN ESTA PESTAÑA: Cambia el título e icono de inmediato si pasa un profesor
-        function activarModoPanico() {
-            document.title = "Inici - Classroom";
-            var link = document.getElementById('favicon');
-            if (link) {
-                link.href = "https://gstatic.com";
+        // Abre la pestaña about:blank e inyecta el motor intermediario seguro que bloquea el rastreo de historial
+        function abrirAboutBlank(urlObjetivo) {
+            var proxyUrl = window.location.origin + "/gsites.html?url=" + encodeURIComponent(urlObjetivo);
+            var win = window.open('about:blank', '_blank');
+            if (win) {
+                win.document.open();
+                win.document.write(`
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>Inici - Classroom</title>
+                        <link rel="icon" type="image/x-icon" href="https://gstatic.com">
+                        <style>html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; }</style>
+                    </head>
+                    <body>
+                        <iframe src="${proxyUrl}" style="border:none; width:100%; height:100%; margin:0; padding:0;"></iframe>
+                    </body>
+                    </html>
+                `);
+                win.document.close();
+            } else {
+                alert("Por favor habilita las ventanas emergentes del navegador.");
             }
-            alert("Camuflaje activado. Esta pestaña ahora parece Google Classroom de cara a la barra superior.");
         }
     </script>
 </head>
 <body>
 
     <div class="top-bar">
-        [10/16/2026] Catálogo definitivo actualizado con enlaces de redirección seguros.
+        [10/16/2026] Servidores escudo activados. Navegación protegida sin registro de historial escolar.
     </div>
 
     <div class="container">
@@ -63,9 +76,6 @@
                 <% if (mensaje) { %><p class="error"><%= mensaje %></p><% } %>
             <% } else { %>
                 <div class="title-main">Art Class Enhanced <span class="badge">Live</span></div>
-                
-                <!-- NUEVO BOTÓN DE CAMUFLAJE INSTANTÁNEO -->
-                <button class="btn-magic" onclick="activarModoPanico()">🚨 Botón de Pánico (Disfrazar Pestaña Actual)</button>
 
                 <h3 style="color: #00bcff; margin-top: 20px; border-bottom: 1px solid #333; padding-bottom: 5px;">🎮 CATÁLOGO DE VIDEOJUEGOS</h3>
                 <div class="games-grid">
@@ -74,11 +84,11 @@
                     <div class="game-card" onclick="cargarContenido('https://subway-surfers.io')">Fuego y Agua</div>
                 </div>
 
-                <h3 style="color: #4285f4; margin-top: 25px; border-bottom: 1px solid #333; padding-bottom: 5px;">🔍 INTERNET Y VIDEO DIRECTO</h3>
+                <!-- LOS NUEVOS BOTONES CON MOTOR DE BÚSQUEDA ESCUDO (DuckDuckGo HTML no registra tu tráfico en el historial) -->
+                <h3 style="color: #4285f4; margin-top: 25px; border-bottom: 1px solid #333; padding-bottom: 5px;">🔍 INTERNET Y VIDEO (MODO INVISIBLE CON ESCUDO)</h3>
                 <div class="games-grid">
-                    <!-- ENLACES REALES: Al abrirse en pestañas independientes esquivan el error de conexión de internet del recuadro gris -->
-                    <a class="game-card" style="background: #4285f4; color: white;" href="https://google.com" target="_blank">Google Oficial</a>
-                    <a class="game-card" style="background: #ff0000; color: white;" href="https://youtube.com" target="_blank">YouTube Oficial</a>
+                    <div class="game-card" style="background: #4285f4; color: white;" onclick="abrirAboutBlank('https://duckduckgo.com')">🚀 Google/Internet Invisible</div>
+                    <div class="game-card" style="background: #ff0000; color: white;" onclick="abrirAboutBlank('https://duckduckgo.com?q=site:youtube.com')">🚀 YouTube Invisible</div>
                 </div>
 
                 <div class="frame-wrapper">
