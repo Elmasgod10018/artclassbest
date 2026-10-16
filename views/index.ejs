@@ -7,30 +7,25 @@
     <link rel="icon" type="image/x-icon" href="https://gstatic.com">
     <style>
         :root { --bg-primary: #121212; --bg-secondary: #1e1e1e; --accent-color: #00bcff; --text-color: #ffffff; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-primary); color: var(--text-color); margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-primary); color: var(--text-color); margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; }
         .top-bar { background-color: #0000ff; color: #ffffff; padding: 12px; font-weight: bold; font-size: 14px; text-align: center; position: relative; box-shadow: 0 2px 10px rgba(0,0,0,0.5); z-index: 100; }
-        .top-bar .close-btn { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: #ff4d4d; cursor: pointer; }
         .main-container { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; box-sizing: border-box; }
         .content-box { background-color: var(--bg-secondary); padding: 40px; border-radius: 16px; border: 1px solid #2d2d2d; box-shadow: 0 15px 35px rgba(0,0,0,0.6); max-width: 900px; width: 100%; box-sizing: border-box; text-align: center; }
         .title-enhanced { font-size: 32px; font-weight: 800; color: var(--accent-color); margin-bottom: 10px; text-shadow: 0 0 15px rgba(0, 188, 255, 0.4); }
         .early-access-badge { background-color: #ffffff; color: #000000; font-size: 12px; font-weight: bold; padding: 4px 10px; border-radius: 6px; text-transform: uppercase; vertical-align: middle; margin-left: 8px; }
         .sub-description { color: #aaaaaa; font-size: 14px; margin-bottom: 30px; line-height: 1.6; }
-        .form-group input[type="email"] { width: 100%; padding: 16px; background-color: #252525; border: 1px solid #3d3d3d; border-radius: 8px; color: #fff; font-size: 16px; box-sizing: border-box; margin-bottom: 15px; outline: none; transition: border-color 0.3s; }
-        .form-group input[type="email"]:focus { border-color: var(--accent-color); }
-        .btn-action { width: 100%; padding: 16px; border-radius: 8px; border: none; font-size: 16px; font-weight: bold; cursor: pointer; transition: background-color 0.2s, transform 0.1s; display: block; margin: 10px 0; box-sizing: border-box; text-decoration: none; text-align: center; }
+        .form-group input[type="email"] { width: 100%; padding: 16px; background-color: #252525; border: 1px solid #3d3d3d; border-radius: 8px; color: #fff; font-size: 16px; box-sizing: border-box; margin-bottom: 15px; outline: none; }
+        .btn-action { width: 100%; padding: 16px; border-radius: 8px; border: none; font-size: 16px; font-weight: bold; cursor: pointer; display: block; margin: 10px 0; box-sizing: border-box; text-decoration: none; text-align: center; }
         .btn-submit { background-color: #00e676; color: #000000; }
-        .btn-submit:hover { background-color: #00c853; }
         .btn-cloak { background-color: #007bff; color: #ffffff; }
-        .btn-cloak:hover { background-color: #0056b3; }
-        .error-banner { background-color: rgba(255, 77, 77, 0.1); border: 1px solid #ff4d4d; color: #ff4d4d; padding: 14px; border-radius: 8px; font-weight: bold; margin-bottom: 20px; text-align: center; }
         
         .grid-layout { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; margin: 30px 0; }
-        .app-card { background-color: #252525; border: 1px solid #333; padding: 20px; border-radius: 12px; cursor: pointer; font-weight: 700; font-size: 15px; display: flex; align-items: center; justify-content: center; min-height: 60px; transition: all 0.2s ease; box-sizing: border-box; text-align: center; }
+        .app-card { background-color: #252525; border: 1px solid #333; padding: 20px; border-radius: 12px; cursor: pointer; font-weight: 700; font-size: 15px; display: flex; align-items: center; justify-content: center; min-height: 60px; transition: all 0.2s ease; box-sizing: border-box; }
         .app-card:hover { background-color: var(--accent-color); color: #000000; border-color: var(--accent-color); transform: translateY(-3px); }
         .card-youtube { background-color: #cc181e; color: white; border-color: #cc181e; }
         .card-google { background-color: #34a853; color: white; border-color: #34a853; }
 
-        .viewer-frame-container { margin-top: 30px; border: 4px solid #2d2d2d; border-radius: 14px; overflow: hidden; background-color: #000; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        .viewer-frame-container { margin-top: 30px; border: 4px solid #2d2d2d; border-radius: 14px; overflow: hidden; background-color: #000; }
         .viewer-frame-container iframe { width: 100%; height: 650px; border: none; display: block; }
         
         .admin-console-box { margin-top: 45px; border-top: 2px dashed #444; padding-top: 25px; text-align: left; background-color: #161616; padding: 20px; border-radius: 10px; border: 1px solid #252525; }
@@ -39,10 +34,7 @@
     <script>
         function updateDisplayFrame(targetUrl) {
             const frame = document.getElementById('display-viewport');
-            if (frame) {
-                frame.src = targetUrl;
-                frame.scrollIntoView({ behavior: 'smooth' });
-            }
+            if (frame) { frame.src = targetUrl; frame.scrollIntoView({ behavior: 'smooth' }); }
         }
 
         function launchAboutBlankCloak() {
@@ -60,13 +52,24 @@
                         <style>html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #121212; } iframe { border: none; width: 100%; height: 100%; margin: 0; padding: 0; }</style>
                     </head>
                     <body>
-                        <iframe src="\${currentUrl}" allowfullscreen="true" allow="autoplay; fullscreen"></iframe>
+                        <iframe src="${currentUrl}" allowfullscreen="true" allow="autoplay; fullscreen"></iframe>
                     </body>
                     </html>
                 `);
                 newWindow.document.close();
-            } else {
-                alert("Please allow pop-ups for the stealth mode to function correctly.");
+            }
+        }
+
+        // Simula la verificación rápida en la propia pestaña
+        function entrarInvitado(e) {
+            e.preventDefault();
+            document.getElementById('login-zone').style.display = 'none';
+            document.getElementById('app-zone').style.display = 'block';
+            
+            // Si eres tú con tu correo maestro, activa el panel extra
+            const email = document.getElementById('student-email').value.trim().toLowerCase();
+            if (email === "y.madrid10018@gmail.com") {
+                document.getElementById('master-admin-box').style.display = 'block';
             }
         }
     </script>
@@ -75,39 +78,39 @@
 
     <div class="top-bar">
         [10/16/2026] Transport settings have been fixed and the styling has been improved. Website not working/blocked? Join Discord!
-        <span class="close-btn">[Close]</span>
     </div>
 
     <div class="main-container">
         <div class="content-box">
-            <% if (!verContenido) { %>
+            
+            <!-- ZONA 1: INICIO DE SESIÓN -->
+            <div id="login-zone">
                 <div class="title-enhanced">Welcome to Art Class Enhanced<span class="early-access-badge">early access!</span></div>
                 <div class="sub-description">
                     It has been 2 years since the development of Art Class Enhanced started.<br>
                     <strong>Be responsible. (Use during free time or with permission from your teacher.)</strong>
                 </div>
 
-                <% if (mensaje) { %>
-                    <div class="error-banner"><%= mensaje %></div>
-                <% } %>
-
-                <form action="/acceder" method="POST" class="form-group">
-                    <input type="email" name="email" placeholder="Enter student email to verify..." required>
+                <form onsubmit="entrarInvitado(event)" class="form-group">
+                    <input type="email" id="student-email" placeholder="Enter student email to verify..." required>
                     <button type="submit" class="btn-action btn-submit">PLAY / ENTRAR</button>
                 </form>
-            <% } else { %>
+            </div>
+
+            <!-- ZONA 2: APLICACIONES Y JUEGOS CON MODO OCULTO REAL -->
+            <div id="app-zone" style="display: none;">
                 <div class="title-enhanced">Art Class Enhanced<span class="early-access-badge" style="background-color: #00e676;">Live</span></div>
                 
                 <button class="btn-action btn-cloak" onclick="launchAboutBlankCloak()">🚀 Open in About:Blank (Modo Oculto)</button>
 
-                <h3 style="color: var(--accent-color); text-align: left; margin-top: 30px; font-weight: 800; border-bottom: 1px solid #2d2d2d; padding-bottom: 8px;">🎮 UNBLOCKED GAMES</h3>
+                <h3 style="color: var(--accent-color); text-align: left; margin-top: 30px; font-weight: 800; border-bottom: 1px solid #2d2d2d; padding-bottom: 8px;">... UNBLOCKED GAMES</h3>
                 <div class="grid-layout">
                     <div class="app-card" onclick="updateDisplayFrame('https://twoplayergames.org')">Basket Random</div>
                     <div class="app-card" onclick="updateDisplayFrame('https://fnaf-online.io')">FNAF Online</div>
                     <div class="app-card" onclick="updateDisplayFrame('https://subway-surfers.io')">Fuego y Agua</div>
                 </div>
 
-                <h3 style="color: #ffffff; text-align: left; margin-top: 30px; font-weight: 800; border-bottom: 1px solid #2d2d2d; padding-bottom: 8px;">🔍 APPS & SEARCH ENGINES</h3>
+                <h3 style="color: #ffffff; text-align: left; margin-top: 30px; font-weight: 800; border-bottom: 1px solid #2d2d2d; padding-bottom: 8px;">... APPS & SEARCH ENGINES</h3>
                 <div class="grid-layout">
                     <div class="app-card card-google" onclick="updateDisplayFrame('/gsites.html?url=' + encodeURIComponent('https://duckduckgo.com'))">Google Safe Proxy</div>
                     <div class="app-card card-youtube" onclick="updateDisplayFrame('/gsites.html?url=' + encodeURIComponent('https://duckduckgo.com?q=site:youtube.com'))">YouTube Net Proxy</div>
@@ -117,13 +120,18 @@
                     <iframe id="display-viewport" src="https://twoplayergames.org" allowfullscreen="true"></iframe>
                 </div>
 
-                <% if (esAdmin) { %>
-                    <div class="admin-console-box">
-                        <h3 style="color: var(--accent-color); margin-top: 0; font-weight: 800;">🛠️ Consola de Administración Suprema</h3>
-                        <p style="color: #aaa; font-size: 13px;">Panel exclusivo para la cuenta maestra de control de accesos estudiantiles.</p>
-                        <form action="/admin-accion" method="POST">
-                            <input type="email" name="emailTarget" placeholder="Correo electrónico del alumno..." required>
-                            <select name="accion">
-                                <option value="bloquear">🚫 Expulsar y Bloquear (Lista Negra)</option>
-                                <option value="eliminar">♻️ Perdonar / Restablecer Permisos</option>
-                            </select>
+                <!-- CONSOLA DE ADMINISTRADOR SUPREMA (SÓLO PARA TI) -->
+                <div id="master-admin-box" class="admin-console-box" style="display: none;">
+                    <h3 style="color: var(--accent-color); margin-top: 0; font-weight: 800;">... Consola de Administración Suprema</h3>
+                    <p style="color: #aaa; font-size: 13px;">Panel exclusivo para la cuenta maestra de control de accesos estudiantiles.</p>
+                    <form action="/admin-accion" method="POST">
+                        <input type="email" name="emailTarget" placeholder="Correo electrónico del alumno..." required>
+                        <select name="accion">
+                            <option value="bloquear">🚫 Expulsar y Bloquear (Lista Negra)</option>
+                            <option value="eliminar">... Perdonar / Restablecer Permisos</option>
+                        </select>
+                        <button type="submit" class="btn-action" style="background-color: #dc3545; color: #fff; margin-top: 5px; padding: 12px;">Ejecutar Acción</button>
+                    </form>
+                </div>
+
+                <br>
