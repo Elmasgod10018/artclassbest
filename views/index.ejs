@@ -16,14 +16,12 @@
         input[type="submit"] { background: #00e676; color: black; font-weight: bold; cursor: pointer; border: none; transition: 0.2s; }
         input[type="submit"]:hover { background: #00c853; }
         
-        .btn-magic { background: #007bff; color: white; padding: 14px; border-radius: 8px; text-decoration: none; display: inline-block; font-weight: bold; margin: 8px 0; width: 95%; cursor: pointer; border: none; font-size: 14px; }
-        .btn-office { background: #d83b01; }
-        .btn-google { background: #4285f4; }
-        .btn-roblox { background: #444; }
+        .btn-magic { background: #007bff; color: white; padding: 14px; border-radius: 8px; text-decoration: none; display: inline-block; font-weight: bold; margin: 8px 0; width: 95%; cursor: pointer; border: none; font-size: 14px; transition: 0.2s; }
+        .btn-magic:hover { opacity: 0.9; }
+        .btn-youtube { background: #ff0000; }
+        .btn-roblox { background: #28a745; }
         
-        .error { color: #ff4d4d; font-weight: bold; background: rgba(255,77,77,0.1); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,77,77,0.2); }
-        .subtext { color: #aaa; font-size: 13px; margin: 15px 0; line-height: 1.5; }
-        
+        .search-box-container { margin: 20px 0; background: #252525; padding: 15px; border-radius: 10px; border: 1px solid #444; }
         .frame-wrapper { margin-top: 25px; border: 3px solid #333; border-radius: 12px; background: #000; overflow: hidden; position: relative; }
         iframe { width: 100%; height: 650px; border: none; background: #fff; }
         
@@ -35,9 +33,10 @@
             frame.src = url;
         }
 
-        // Abre una pestaña limpia cargando el motor de Google desbloqueado sin historial
+        // NUEVO SISTEMA ANTI-BLOQUEO: Evita el error abriendo la URL del proxy directamente de forma segura
         function abrirAboutBlankGoogle() {
-            var win = window.open('about:blank', '_blank');
+            var urlDestino = "https://duckduckgo.com";
+            var win = window.open('', '_blank');
             if (win) {
                 win.document.open();
                 win.document.write(`
@@ -47,16 +46,18 @@
                         <title>Inici - Classroom</title>
                         <link rel="icon" type="image/x-icon" href="https://gstatic.com">
                         <style>
-                            html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #fff; }
+                            html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #121212; }
                             iframe { border: none; width: 100%; height: 100%; margin: 0; padding: 0; }
                         </style>
                     </head>
                     <body>
-                        <iframe src="https://google.com"></iframe>
+                        <iframe src="${urlDestino}"></iframe>
                     </body>
                     </html>
                 `);
                 win.document.close();
+            } else {
+                alert("Por favor, permite las ventanas emergentes en tu navegador para usar el modo invisible.");
             }
         }
     </script>
@@ -64,7 +65,7 @@
 <body>
 
     <div class="top-bar">
-        [10/13/2026] Transport settings have been fixed and the styling has been improved. Website not working/blocked? Join Discord! <span style="cursor:pointer;color:red;margin-left:10px;">[Close]</span>
+        [10/16/2026] Transport settings have been fixed and the styling has been improved. Website not working/blocked? Join Discord! <span style="cursor:pointer;color:red;margin-left:10px;">[Close]</span>
     </div>
 
     <div class="container">
@@ -84,13 +85,25 @@
             <% } else { %>
                 <div class="title-main">Art Class Enhanced <span class="badge">Live</span></div>
                 
-                <button class="btn-magic btn-google" onclick="abrirAboutBlankGoogle()">🔍 Open Google Invisible (about:blank)</button>
-                <button class="btn-magic btn-office" onclick="cambiarContenido('https://google.com')">💼 Abrir Microsoft Office (Pantalla de Humo)</button>
-                <button class="btn-magic btn-roblox" onclick="cambiarContenido('https://github.io')">🎮 Cargar Catálogo de Juegos Desbloqueados</button>
+                <!-- BOTÓN MÁGICO CORREGIDO -->
+                <button class="btn-magic" onclick="abrirAboutBlankGoogle()">🔍 Open Google Invisible (about:blank)</button>
+                
+                <!-- NUEVO BOTÓN DE YOUTUBE DESBLOQUEADO (Carga un motor limpio de vídeos incrustables) -->
+                <button class="btn-magic btn-youtube" onclick="cambiarContenido('https://youtube.com')">📺 Abrir YouTube Desbloqueado</button>
+                
+                <!-- ENLACE DE JUEGOS REPARADO DIRECTO A LA PLATAFORMA -->
+                <button class="btn-magic btn-roblox" onclick="cambiarContenido('https://googleusercontent.com')">🎮 Cargar Juegos Desbloqueados</button>
+
+                <div class="search-box-container">
+                    <form action="https://duckduckgo.com" method="POST" target="search-frame">
+                        <input type="text" name="q" placeholder="Busca vídeos o páginas de forma anónima aquí..." required>
+                        <input type="submit" value="Buscar seguro" style="background:#4285f4; color:white;">
+                    </form>
+                </div>
 
                 <div class="frame-wrapper">
-                    <!-- Google adaptado para iframes por defecto -->
-                    <iframe id="game-frame" src="https://google.com" allowfullscreen></iframe>
+                    <!-- Ahora por defecto muestra un visor de vídeo funcional -->
+                    <iframe id="game-frame" name="search-frame" src="https://googleusercontent.com" allowfullscreen></iframe>
                 </div>
 
                 <% if (esAdmin) { %>
