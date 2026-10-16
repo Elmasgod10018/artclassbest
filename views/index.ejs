@@ -2,15 +2,42 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Art Class</title>
+    <title>Art Class - Verificación</title>
     <style>
         body { font-family: Arial, sans-serif; background: #1a1a1a; color: #fff; text-align: center; padding: 50px; }
-        .box { background: #2a2a2a; padding: 30px; border-radius: 10px; display: inline-block; min-width: 320px; box-shadow: 0px 4px 10px rgba(0,0,0,0.5); }
-        input[type="email"], input[type="submit"] { padding: 12px; margin: 10px 0; width: 90%; border-radius: 5px; border: none; box-sizing: border-box; }
+        .box { background: #2a2a2a; padding: 30px; border-radius: 10px; display: inline-block; min-width: 350px; box-shadow: 0px 4px 10px rgba(0,0,0,0.5); }
+        input[type="email"], input[type="submit"], select { padding: 12px; margin: 10px 0; width: 90%; border-radius: 5px; border: none; box-sizing: border-box; }
         input[type="submit"] { background: #28a745; color: white; font-weight: bold; cursor: pointer; }
+        .btn-magic { background: #007bff; color: white; padding: 12px; border-radius: 5px; text-decoration: none; display: inline-block; font-weight: bold; margin: 10px 0; width: 90%; cursor: pointer; border: none;}
         .error { color: #ff4d4d; font-weight: bold; background: rgba(255,77,77,0.1); padding: 10px; border-radius: 5px; }
-        .admin-panel { margin-top: 40px; border-top: 2px dashed #444; padding-top: 20px; }
+        .admin-panel { margin-top: 40px; border-top: 2px dashed #555; padding-top: 20px; background: #333; padding: 15px; border-radius: 5px; }
     </style>
+    <script>
+        // TRUCO MAESTRO: Abre la sala de juegos en una pestaña fantasma (about:blank) disfrazada de Google Classroom
+        function abrirAboutBlank() {
+            var urlDestino = window.location.href; 
+            var win = window.open();
+            win.document.body.style.margin = '0';
+            win.document.body.style.height = '100vh';
+            
+            // Cambiar título e icono de la pestaña para engañar al profesor
+            win.document.title = "Clases de Google Classroom";
+            var link = win.document.createElement('link');
+            link.rel = 'icon';
+            link.href = 'https://gstatic.com';
+            win.document.head.appendChild(link);
+
+            // Meter el juego integrado
+            var iframe = win.document.createElement('iframe');
+            iframe.style.border = 'none';
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.style.margin = '0';
+            // Cargamos una suite gigante de juegos desbloqueados para el aula
+            iframe.src = "https://now.gg"; 
+            win.document.body.appendChild(iframe);
+        }
+    </script>
 </head>
 <body>
     <div class="box">
@@ -18,20 +45,42 @@
             <h2>Verificación de Estudiante</h2>
             <form action="/acceder" method="POST">
                 <input type="email" name="email" placeholder="tu-correo@gmail.com" required>
-                <input type="submit" value="Entrar">
+                <input type="submit" value="Verificar y Entrar">
             </form>
             <% if (mensaje) { %><p class="error"><%= mensaje %></p><% } %>
         <% } else { %>
-            <h2>Contenido de Art Class</h2>
-            <iframe src="https://ejemplo.com" width="100%" height="500px" style="border:none;"></iframe>
+            <h2>¡Acceso Concedido!</h2>
+            <p style="color:#28a745;"><%= mensaje %></p>
+
+            <!-- BOTÓN MÁGICO 1: ABOUT:BLANK DISFRAZADO DE CLASSROOM -->
+            <button class="btn-magic" onclick="abrirAboutBlank()">🚀 Open in About:Blank (Modo Invisible)</button>
+
+            <!-- BOTÓN MÁGICO 2: MICROSOFT OFFICE INTEGRADO EN LA PÁGINA (No te saca de aquí) -->
+            <button class="btn-magic" style="background:#d83b01;" onclick="document.getElementById('game-frame').src='https://office.com'">💼 Abrir Microsoft Office (Falso Inicio)</button>
+            <button class="btn-magic" style="background:#6c757d;" onclick="document.getElementById('game-frame').src='https://now.gg'">🎮 Volver a Cargar Roblox</button>
+
+            <br><br>
+            <!-- Aquí abajo se renderizan los juegos embebidos -->
+            <iframe id="game-frame" src="https://now.gg" width="100%" height="600px" style="border:3px solid #444; border-radius:10px; background: #000;"></iframe>
+
+            <!-- PANEL DE CONTROL SÓLO VISIBLE PARA TI (EL JEFE) -->
+            <% if (esAdmin) { %>
+                <div class="admin-panel">
+                    <h3>🛠️ Panel de Control de Expulsión</h3>
+                    <form action="/admin-accion" method="POST">
+                        <input type="email" name="emailTarget" placeholder="Correo del alumno" required>
+                        <select name="accion">
+                            <option value="bloquear">🚫 Expulsar y Bloquear (Lista Negra)</option>
+                            <option value="eliminar">♻️ Eliminar Registro / Perdonar</option>
+                        </select>
+                        <input type="submit" value="Aplicar Acción Ejecutiva" style="background:#dc3545;">
+                    </form>
+                </div>
+            <% } %>
+
+            <br><br>
+            <a href="/salir" style="color:#aaa; text-decoration:none; font-size:12px;">Cerrar Sesión Segura</a>
         <% } %>
-        <div class="admin-panel">
-            <h3>Panel de Expulsión</h3>
-            <form action="/bloquear-correo" method="POST">
-                <input type="email" name="emailAdmin" placeholder="Correo a expulsar" required>
-                <input type="submit" value="Bloquear" style="background:#dc3545;">
-            </center>
-        </div>
     </div>
 </body>
 </html>
