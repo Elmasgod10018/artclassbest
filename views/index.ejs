@@ -2,85 +2,97 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Art Class - Verificación</title>
+    <title>Home - Classroom</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #1a1a1a; color: #fff; text-align: center; padding: 50px; }
-        .box { background: #2a2a2a; padding: 30px; border-radius: 10px; display: inline-block; min-width: 350px; box-shadow: 0px 4px 10px rgba(0,0,0,0.5); }
-        input[type="email"], input[type="submit"], select { padding: 12px; margin: 10px 0; width: 90%; border-radius: 5px; border: none; box-sizing: border-box; }
-        input[type="submit"] { background: #28a745; color: white; font-weight: bold; cursor: pointer; }
-        .btn-magic { background: #007bff; color: white; padding: 12px; border-radius: 5px; text-decoration: none; display: inline-block; font-weight: bold; margin: 10px 0; width: 90%; cursor: pointer; border: none;}
-        .error { color: #ff4d4d; font-weight: bold; background: rgba(255,77,77,0.1); padding: 10px; border-radius: 5px; }
-        .admin-panel { margin-top: 40px; border-top: 2px dashed #555; padding-top: 20px; background: #333; padding: 15px; border-radius: 5px; }
+        body { font-family: Arial, sans-serif; background: #121212; color: #fff; text-align: center; margin: 0; padding: 0; overflow-x: hidden; }
+        .top-bar { background: #0000ff; color: white; padding: 10px; font-weight: bold; font-size: 14px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
+        .container { padding: 40px 20px; }
+        .box { background: #1e1e1e; padding: 30px; border-radius: 15px; display: inline-block; min-width: 400px; box-shadow: 0px 10px 25px rgba(0,0,0,0.7); border: 1px solid #333; position: relative; }
+        .title-main { color: #00bcff; font-size: 28px; margin-bottom: 5px; font-weight: bold; text-shadow: 0 0 10px rgba(0,188,255,0.3); }
+        .badge { background: #fff; color: #000; font-weight: bold; padding: 3px 8px; border-radius: 5px; font-size: 12px; vertical-align: middle; }
+        
+        input[type="email"], input[type="text"], input[type="submit"], select { padding: 14px; margin: 10px 0; width: 95%; border-radius: 8px; border: 1px solid #444; background: #252525; color: white; box-sizing: border-box; font-size: 14px; }
+        input[type="submit"] { background: #00e676; color: black; font-weight: bold; cursor: pointer; border: none; transition: 0.2s; }
+        input[type="submit"]:hover { background: #00c853; }
+        
+        .btn-magic { background: #007bff; color: white; padding: 14px; border-radius: 8px; text-decoration: none; display: inline-block; font-weight: bold; margin: 8px 0; width: 95%; cursor: pointer; border: none; font-size: 14px; }
+        .btn-office { background: #d83b01; }
+        .btn-roblox { background: #444; }
+        
+        .error { color: #ff4d4d; font-weight: bold; background: rgba(255,77,77,0.1); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,77,77,0.2); }
+        .subtext { color: #aaa; font-size: 13px; margin: 15px 0; line-height: 1.5; }
+        
+        .frame-wrapper { margin-top: 25px; border: 3px solid #333; border-radius: 12px; background: #000; overflow: hidden; position: relative; }
+        iframe { width: 100%; height: 650px; border: none; }
+        
+        .admin-panel { margin-top: 40px; border-top: 2px dashed #444; padding-top: 20px; background: #1a1a1a; padding: 20px; border-radius: 8px; text-align: left; }
     </style>
     <script>
-        // TRUCO MAESTRO: Abre la sala de juegos en una pestaña fantasma (about:blank) disfrazada de Google Classroom
-        function abrirAboutBlank() {
-            var urlDestino = window.location.href; 
-            var win = window.open();
-            win.document.body.style.margin = '0';
-            win.document.body.style.height = '100vh';
-            
-            // Cambiar título e icono de la pestaña para engañar al profesor
-            win.document.title = "Clases de Google Classroom";
-            var link = win.document.createElement('link');
-            link.rel = 'icon';
-            link.href = 'https://gstatic.com';
-            win.document.head.appendChild(link);
+        function cambiarContenido(url) {
+            var frame = document.getElementById('game-frame');
+            frame.src = url;
+        }
 
-            // Meter el juego integrado
-            var iframe = win.document.createElement('iframe');
-            iframe.style.border = 'none';
-            iframe.style.width = '100%';
-            iframe.style.height = '100%';
-            iframe.style.margin = '0';
-            // Cargamos una suite gigante de juegos desbloqueados para el aula
-            iframe.src = "https://now.gg"; 
-            win.document.body.appendChild(iframe);
+        function modoPanico() {
+            document.title = "Clases de Google Classroom";
+            var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+            link.type = 'image/x-icon';
+            link.rel = 'shortcut icon';
+            link.href = 'https://gstatic.com';
+            document.getElementsByTagName('head').appendChild(link);
+            alert("Modo Camuflaje Activado. La pestaña ahora parece Google Classroom.");
         }
     </script>
 </head>
 <body>
-    <div class="box">
-        <% if (!verContenido) { %>
-            <h2>Verificación de Estudiante</h2>
-            <form action="/acceder" method="POST">
-                <input type="email" name="email" placeholder="tu-correo@gmail.com" required>
-                <input type="submit" value="Verificar y Entrar">
-            </form>
-            <% if (mensaje) { %><p class="error"><%= mensaje %></p><% } %>
-        <% } else { %>
-            <h2>¡Acceso Concedido!</h2>
-            <p style="color:#28a745;"><%= mensaje %></p>
 
-            <!-- BOTÓN MÁGICO 1: ABOUT:BLANK DISFRAZADO DE CLASSROOM -->
-            <button class="btn-magic" onclick="abrirAboutBlank()">🚀 Open in About:Blank (Modo Invisible)</button>
+    <div class="top-bar">
+        [10/13/2026] Transport settings have been fixed and the styling has been improved. Website not working/blocked? Join Discord! <span style="cursor:pointer;color:red;margin-left:10px;">[Close]</span>
+    </div>
 
-            <!-- BOTÓN MÁGICO 2: MICROSOFT OFFICE INTEGRADO EN LA PÁGINA (No te saca de aquí) -->
-            <button class="btn-magic" style="background:#d83b01;" onclick="document.getElementById('game-frame').src='https://office.com'">💼 Abrir Microsoft Office (Falso Inicio)</button>
-            <button class="btn-magic" style="background:#6c757d;" onclick="document.getElementById('game-frame').src='https://now.gg'">🎮 Volver a Cargar Roblox</button>
-
-            <br><br>
-            <!-- Aquí abajo se renderizan los juegos embebidos -->
-            <iframe id="game-frame" src="https://now.gg" width="100%" height="600px" style="border:3px solid #444; border-radius:10px; background: #000;"></iframe>
-
-            <!-- PANEL DE CONTROL SÓLO VISIBLE PARA TI (EL JEFE) -->
-            <% if (esAdmin) { %>
-                <div class="admin-panel">
-                    <h3>🛠️ Panel de Control de Expulsión</h3>
-                    <form action="/admin-accion" method="POST">
-                        <input type="email" name="emailTarget" placeholder="Correo del alumno" required>
-                        <select name="accion">
-                            <option value="bloquear">🚫 Expulsar y Bloquear (Lista Negra)</option>
-                            <option value="eliminar">♻️ Eliminar Registro / Perdonar</option>
-                        </select>
-                        <input type="submit" value="Aplicar Acción Ejecutiva" style="background:#dc3545;">
-                    </form>
+    <div class="container">
+        <div class="box">
+            <% if (!verContenido) { %>
+                <div class="title-main">Welcome to Art Class Enhanced <span class="badge">early access!</span></div>
+                <div class="subtext">
+                    It has been 2 years since the development of Art Class Enhanced started.<br>
+                    <strong>Be responsible. (Use during free time or with permission from your teacher.)</strong>
                 </div>
-            <% } %>
 
-            <br><br>
-            <a href="/salir" style="color:#aaa; text-decoration:none; font-size:12px;">Cerrar Sesión Segura</a>
-        <% } %>
+                <form action="/acceder" method="POST">
+                    <input type="email" name="email" placeholder="Introduce tu correo estudiantil para iniciar..." required>
+                    <input type="submit" value="PLAY / ENTRAR">
+                </form>
+                <% if (mensaje) { %><p class="error"><%= mensaje %></p><% } %>
+            <% } else { %>
+                <div class="title-main">Art Class Enhanced <span class="badge">Live</span></div>
+                
+                <button class="btn-magic" onclick="modoPanico()">🚨 Botón de Pánico (Disfrazar esta pestaña)</button>
+                <button class="btn-magic btn-office" onclick="cambiarContenido('https://office.com')">💼 Abrir Microsoft Office (Pantalla de Humo)</button>
+                <button class="btn-magic btn-roblox" onclick="cambiarContenido('https://github.io')">🎮 Cargar Catálogo de Juegos Desbloqueados</button>
+
+                <div class="frame-wrapper">
+                    <iframe id="game-frame" src="https://github.io" allowfullscreen></iframe>
+                </div>
+
+                <% if (esAdmin) { %>
+                    <div class="admin-panel">
+                        <h3 style="color:#00bcff; margin-top:0;">🛠️ Consola del Administrador (Exclusiva)</h3>
+                        <form action="/admin-accion" method="POST">
+                            <input type="email" name="emailTarget" placeholder="Correo del alumno a gestionar" required style="width:100%;">
+                            <select name="accion" style="width:100%;">
+                                <option value="bloquear">🚫 Banear y meter en Lista Negra</option>
+                                <option value="eliminar">♻️ Perdonar / Limpiar Registro</option>
+                            </select>
+                            <input type="submit" value="Ejecutar Orden" style="width:100%; background:#dc3545; color:white;">
+                        </form>
+                    </div>
+                <% } %>
+
+                <br>
+                <a href="/salir" style="color:#666; text-decoration:none; font-size:13px;">Cerrar sesión de estudiante</a>
+            <% } %>
+        </div>
     </div>
 </body>
 </html>
