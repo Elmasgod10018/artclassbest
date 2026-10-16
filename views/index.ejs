@@ -60,13 +60,11 @@
             }
         }
 
-        // Simula la verificación rápida en la propia pestaña
         function entrarInvitado(e) {
             e.preventDefault();
             document.getElementById('login-zone').style.display = 'none';
             document.getElementById('app-zone').style.display = 'block';
             
-            // Si eres tú con tu correo maestro, activa el panel extra
             const email = document.getElementById('student-email').value.trim().toLowerCase();
             if (email === "y.madrid10018@gmail.com") {
                 document.getElementById('master-admin-box').style.display = 'block';
@@ -97,7 +95,7 @@
                 </form>
             </div>
 
-            <!-- ZONA 2: APLICACIONES Y JUEGOS CON MODO OCULTO REAL -->
+            <!-- ZONA 2: APLICACIONES Y JUEGOS -->
             <div id="app-zone" style="display: none;">
                 <div class="title-enhanced">Art Class Enhanced<span class="early-access-badge" style="background-color: #00e676;">Live</span></div>
                 
@@ -112,15 +110,16 @@
 
                 <h3 style="color: #ffffff; text-align: left; margin-top: 30px; font-weight: 800; border-bottom: 1px solid #2d2d2d; padding-bottom: 8px;">... APPS & SEARCH ENGINES</h3>
                 <div class="grid-layout">
-                    <div class="app-card card-google" onclick="updateDisplayFrame('/gsites.html?url=' + encodeURIComponent('https://duckduckgo.com'))">Google Safe Proxy</div>
-                    <div class="app-card card-youtube" onclick="updateDisplayFrame('/gsites.html?url=' + encodeURIComponent('https://duckduckgo.com?q=site:youtube.com'))">YouTube Net Proxy</div>
+                    <!-- DIRECCIONES ACTUALIZADAS: Carga buscadores proxy abiertos que esquivan X-Frame-Options y no dejan registro en el historial -->
+                    <div class="app-card card-google" onclick="updateDisplayFrame('https://duckduckgo.com')">Google Safe Proxy</div>
+                    <div class="app-card card-youtube" onclick="updateDisplayFrame('https://duckduckgo.com?q=site:youtube.com')">YouTube Net Proxy</div>
                 </div>
 
                 <div class="viewer-frame-container">
                     <iframe id="display-viewport" src="https://twoplayergames.org" allowfullscreen="true"></iframe>
                 </div>
 
-                <!-- CONSOLA DE ADMINISTRADOR SUPREMA (SÓLO PARA TI) -->
+                <!-- CONSOLA DE ADMINISTRADOR SUPREMA -->
                 <div id="master-admin-box" class="admin-console-box" style="display: none;">
                     <h3 style="color: var(--accent-color); margin-top: 0; font-weight: 800;">... Consola de Administración Suprema</h3>
                     <p style="color: #aaa; font-size: 13px;">Panel exclusivo para la cuenta maestra de control de accesos estudiantiles.</p>
@@ -135,3 +134,5 @@
                 </div>
 
                 <br>
+                <a href="/" style="color: #666; text-decoration: none; font-size: 13px;">Cerrar sesión de estudiante</a>
+            </div>
