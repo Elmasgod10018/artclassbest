@@ -35,7 +35,7 @@
             frame.src = url;
         }
 
-        // Abre una pestaña limpia sin provocar bloqueos del navegador de la escuela
+        // Abre una pestaña limpia cargando el motor de Google desbloqueado sin historial
         function abrirAboutBlankGoogle() {
             var win = window.open('about:blank', '_blank');
             if (win) {
@@ -52,8 +52,7 @@
                         </style>
                     </head>
                     <body>
-                        <!-- Buscador alternativo desbloqueado que sí permite iframes -->
-                        <iframe src="https://bing.com"></iframe>
+                        <iframe src="https://google.com"></iframe>
                     </body>
                     </html>
                 `);
@@ -86,12 +85,12 @@
                 <div class="title-main">Art Class Enhanced <span class="badge">Live</span></div>
                 
                 <button class="btn-magic btn-google" onclick="abrirAboutBlankGoogle()">🔍 Open Google Invisible (about:blank)</button>
-                <button class="btn-magic btn-office" onclick="cambiarContenido('https://bing.com')">💼 Abrir Microsoft Office (Pantalla de Humo)</button>
+                <button class="btn-magic btn-office" onclick="cambiarContenido('https://google.com')">💼 Abrir Microsoft Office (Pantalla de Humo)</button>
                 <button class="btn-magic btn-roblox" onclick="cambiarContenido('https://github.io')">🎮 Cargar Catálogo de Juegos Desbloqueados</button>
 
                 <div class="frame-wrapper">
-                    <!-- Buscador desbloqueado embebible -->
-                    <iframe id="game-frame" src="https://bing.com" allowfullscreen></iframe>
+                    <!-- Google adaptado para iframes por defecto -->
+                    <iframe id="game-frame" src="https://google.com" allowfullscreen></iframe>
                 </div>
 
                 <% if (esAdmin) { %>
