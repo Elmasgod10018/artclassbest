@@ -12,22 +12,59 @@
         .title-main { color: #00bcff; font-size: 28px; margin-bottom: 5px; font-weight: bold; text-shadow: 0 0 10px rgba(0,188,255,0.3); }
         .badge { background: #fff; color: #000; font-weight: bold; padding: 3px 8px; border-radius: 5px; font-size: 12px; vertical-align: middle; }
         
-        input[type="email"], input[type="text"], input[type="submit"], select { padding: 14px; margin: 10px 0; width: 95%; border-radius: 8px; border: 1px solid #444; background: #252525; color: white; box-sizing: border-box; font-size: 14px; }
+        input[type="email"], input[type="submit"], select { padding: 14px; margin: 10px 0; width: 95%; border-radius: 8px; border: 1px solid #444; background: #252525; color: white; box-sizing: border-box; font-size: 14px; }
         input[type="submit"] { background: #00e676; color: black; font-weight: bold; cursor: pointer; border: none; transition: 0.2s; }
         
         .btn-magic { background: #007bff; color: white; padding: 14px; border-radius: 8px; text-decoration: none; display: inline-block; font-weight: bold; margin: 8px 0; width: 95%; cursor: pointer; border: none; font-size: 14px; }
         
         .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; margin: 20px 0; padding: 10px; }
-        .game-card { background: #252525; padding: 15px; border-radius: 10px; border: 1px solid #444; cursor: pointer; font-weight: bold; transition: 0.2s; font-size: 14px; display: flex; align-items: center; justify-content: center; min-height: 50px; text-decoration: none; color: white; }
+        .game-card { background: #252525; padding: 15px; border-radius: 10px; border: 1px solid #444; cursor: pointer; font-weight: bold; transition: 0.2s; font-size: 14px; display: flex; align-items: center; justify-content: center; min-height: 50px; color: white; }
         .game-card:hover { background: #00bcff; color: black; border-color: #00bcff; }
+        
+        .frame-wrapper { margin-top: 25px; border: 3px solid #333; border-radius: 12px; background: #000; overflow: hidden; position: relative; }
+        iframe { width: 100%; height: 600px; border: none; background: #000; }
         
         .admin-panel { margin-top: 40px; border-top: 2px dashed #444; padding-top: 20px; background: #1a1a1a; padding: 20px; border-radius: 8px; text-align: left; }
     </style>
+    <script>
+        function cargarContenido(url) {
+            var frame = document.getElementById('game-frame');
+            frame.src = url;
+            frame.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function abrirAboutBlank() {
+            var destino = window.location.href;
+            var win = window.open('about:blank', '_blank');
+            if (win) {
+                win.document.open();
+                win.document.write(`
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>Inici - Classroom</title>
+                        <link rel="icon" type="image/x-icon" href="https://gstatic.com">
+                        <style>
+                            html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #121212; }
+                            iframe { border: none; width: 100%; height: 100%; margin: 0; padding: 0; }
+                        </style>
+                    </head>
+                    <body>
+                        <iframe src="${destino}" allowfullscreen></iframe>
+                    </body>
+                    </html>
+                `);
+                win.document.close();
+            } else {
+                alert("Por favor, habilita las ventanas emergentes en este navegador para activar el modo oculto.");
+            }
+        }
+    </script>
 </head>
 <body>
 
     <div class="top-bar">
-        [10/16/2026] Catálogo optimizado. Navegación directa configurada para evitar errores de conexión de red.
+        [10/16/2026] Catálogo definitivo actualizado. Usa el modo oculto para proteger tu historial escolar.
     </div>
 
     <div class="container">
@@ -43,22 +80,26 @@
                 <% if (mensaje) { %><p class="error"><%= mensaje %></p><% } %>
             <% } else { %>
                 <div class="title-main">Art Class Enhanced <span class="badge">Live</span></div>
+                
+                <button class="btn-magic" onclick="abrirAboutBlank()">🚀 Open in About:Blank (Modo Oculto)</button>
 
-                <!-- SECCIÓN DE ENLACES EXTERNOS QUE PREVIENEN EL ERROR DE MARCO (IFRAME) -->
+                <!-- TU CATÁLOGO EXCLUSIVO MODIFICADO -->
                 <h3 style="color: #00bcff; margin-top: 20px; border-bottom: 1px solid #333; padding-bottom: 5px;">🎮 CATÁLOGO DE VIDEOJUEGOS</h3>
                 <div class="games-grid">
-                    <a class="game-card" href="https://madpuffers.com" target="_self">Basketball Stars</a>
-                    <a class="game-card" href="https://twoplayergames.org" target="_self">Basket Random</a>
-                    <a class="game-card" href="https://fnaf-online.io" target="_self">FNAF</a>
-                    <a class="game-card" href="https://geometrydash.io" target="_self">Geometry Dash</a>
-                    <a class="game-card" href="https://subway-surfers.io" target="_self">Fuego y Agua</a>
+                    <div class="game-card" onclick="cargarContenido('https://twoplayergames.org')">Basket Random</div>
+                    <div class="game-card" onclick="cargarContenido('https://fnaf-online.io')">FNAF</div>
+                    <div class="game-card" onclick="cargarContenido('https://subway-surfers.io')">Fuego y Agua</div>
                 </div>
 
-                <h3 style="color: #4285f4; margin-top: 25px; border-bottom: 1px solid #333; padding-bottom: 5px;">🔍 INTERNET Y VIDEO DIRECTO</h3>
+                <h3 style="color: #4285f4; margin-top: 25px; border-bottom: 1px solid #333; padding-bottom: 5px;">🔍 INTERNET Y VIDEO</h3>
                 <div class="games-grid">
-                    <!-- Estos elementos procesan la navegación sobre la misma pestaña evitando que Google/YouTube rechacen la señal -->
-                    <a class="game-card" style="background: #4285f4; color: white;" href="https://google.com" target="_self">Google Oficial</a>
-                    <a class="game-card" style="background: #ff0000; color: white;" href="https://youtube.com" target="_self">YouTube Oficial</a>
+                    <div class="game-card" style="background: #4285f4; color: white;" onclick="cargarContenido('https://google.com')">Google Unblocked</div>
+                    <div class="game-card" style="background: #ff0000; color: white;" onclick="cargarContenido('https://youtube.com')">YouTube Player</div>
+                </div>
+
+                <div class="frame-wrapper">
+                    <!-- Ahora carga Basket Random por defecto al entrar -->
+                    <iframe id="game-frame" src="https://twoplayergames.org" allowfullscreen></iframe>
                 </div>
 
                 <% if (esAdmin) { %>
@@ -75,7 +116,7 @@
                     </div>
                 <% } %>
 
-                <br><br>
+                <br>
                 <a href="/salir" style="color:#666; text-decoration:none; font-size:13px;">Cerrar sesión de estudiante</a>
             <% } %>
         </div>
