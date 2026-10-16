@@ -33,6 +33,11 @@
             frame.scrollIntoView({ behavior: 'smooth' });
         }
 
+        // Abre enlaces externos evitando las restricciones de seguridad internas del iframe
+        function abrirEnlaceExterno(url) {
+            window.open(url, '_blank');
+        }
+
         function abrirAboutBlank() {
             var destino = window.location.href;
             var win = window.open();
@@ -56,7 +61,7 @@
                 win.document.body.style.overflow = "hidden";
                 win.document.body.appendChild(iframe);
             } else {
-                alert("Habilita las ventanas emergentes del navegador.");
+                alert("Por favor, habilita las ventanas emergentes del navegador.");
             }
         }
     </script>
@@ -83,24 +88,23 @@
                 
                 <button class="btn-magic" onclick="abrirAboutBlank()">🚀 Open in About:Blank (Modo Oculto)</button>
 
-                <!-- ENLACES TOTALMENTE NUEVOS DIRECTOS Y LIMPIOS -->
-                <h3 style="color: #00bcff; margin-top: 20px; border-bottom: 1px solid #333; padding-bottom: 5px;">🎮 CATÁLOGO DE VIDEOJUEGOS Y APPS</h3>
+                <h3 style="color: #00bcff; margin-top: 20px; border-bottom: 1px solid #333; padding-bottom: 5px;">🎮 CATÁLOGO DE VIDEOJUEGOS</h3>
                 <div class="games-grid">
                     <div class="game-card" onclick="cargarContenido('https://madpuffers.com')">Basketball Stars</div>
                     <div class="game-card" onclick="cargarContenido('https://twoplayergames.org')">Basket Random</div>
                     <div class="game-card" onclick="cargarContenido('https://fnaf-online.io')">FNAF</div>
                     <div class="game-card" onclick="cargarContenido('https://geometrygecko.com')">Geometry Dash</div>
                     <div class="game-card" onclick="cargarContenido('https://subway-surfers.io')">Fuego y Agua</div>
-                    <div class="game-card" style="background: #ff0000; color: white;" onclick="cargarContenido('https://youtube-nocookie.com')">YouTube Proxy</div>
                 </div>
 
-                <h3 style="color: #4285f4; margin-top: 25px; border-bottom: 1px solid #333; padding-bottom: 5px;">🔍 INTERNET DESBLOQUEADO</h3>
-                <div class="games-grid" style="grid-template-columns: 1fr;">
-                    <div class="game-card" style="background: #4285f4; color: white;" onclick="cargarContenido('https://google.com')">Google Unblocked</div>
+                <h3 style="color: #ff0000; margin-top: 25px; border-bottom: 1px solid #333; padding-bottom: 5px;">🔍 INTERNET Y VIDEO</h3>
+                <div class="games-grid">
+                    <!-- Estos botones abrirán buscadores proxy alternativos en ventanas limpias para evitar errores de conexión -->
+                    <div class="game-card" style="background: #4285f4; color: white;" onclick="abrirEnlaceExterno('https://google.com')">Google Oficial</div>
+                    <div class="game-card" style="background: #ff0000; color: white;" onclick="abrirEnlaceExterno('https://youtube.com')">YouTube Oficial</div>
                 </div>
 
                 <div class="frame-wrapper">
-                    <!-- Se abre por defecto con la web directa del creador del juego de baloncesto -->
                     <iframe id="game-frame" src="https://madpuffers.com" allowfullscreen></iframe>
                 </div>
 
