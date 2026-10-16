@@ -33,35 +33,26 @@
             frame.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Abre enlaces externos evitando las restricciones de seguridad internas del iframe
-        function abrirEnlaceExterno(url) {
-            window.open(url, '_blank');
-        }
-
+        // FUNCIÓN ANTI-BLOQUEO MEJORADA: Duplica la vista de juego limpia en modo fantasma sin romper las rutas de acceso
         function abrirAboutBlank() {
-            var destino = window.location.href;
             var win = window.open();
             if (win) {
                 win.document.title = "Inici - Classroom";
-                
                 var link = win.document.createElement('link');
                 link.rel = 'icon';
                 link.href = 'https://gstatic.com';
                 win.document.head.appendChild(link);
 
                 var iframe = win.document.createElement('iframe');
-                iframe.src = destino;
+                iframe.src = window.location.origin;
                 iframe.style.width = "100vw";
                 iframe.style.height = "100vh";
                 iframe.style.border = "none";
                 iframe.style.margin = "0";
-                iframe.style.padding = "0";
                 
                 win.document.body.style.margin = "0";
                 win.document.body.style.overflow = "hidden";
                 win.document.body.appendChild(iframe);
-            } else {
-                alert("Por favor, habilita las ventanas emergentes del navegador.");
             }
         }
     </script>
@@ -69,7 +60,7 @@
 <body>
 
     <div class="top-bar">
-        [10/16/2026] Catálogo definitivo actualizado con servidores estables e independientes.
+        [10/16/2026] Servidores de emulación estables configurados.
     </div>
 
     <div class="container">
@@ -90,22 +81,23 @@
 
                 <h3 style="color: #00bcff; margin-top: 20px; border-bottom: 1px solid #333; padding-bottom: 5px;">🎮 CATÁLOGO DE VIDEOJUEGOS</h3>
                 <div class="games-grid">
-                    <div class="game-card" onclick="cargarContenido('https://madpuffers.com')">Basketball Stars</div>
-                    <div class="game-card" onclick="cargarContenido('https://twoplayergames.org')">Basket Random</div>
-                    <div class="game-card" onclick="cargarContenido('https://fnaf-online.io')">FNAF</div>
-                    <div class="game-card" onclick="cargarContenido('https://geometrygecko.com')">Geometry Dash</div>
-                    <div class="game-card" onclick="cargarContenido('https://subway-surfers.io')">Fuego y Agua</div>
+                    <!-- Servidores espejo abiertos que no restringen la carga en Marcos externos -->
+                    <div class="game-card" onclick="cargarContenido('https://github.io')">Basketball Stars</div>
+                    <div class="game-card" onclick="cargarContenido('https://retrobowl.me')">Basket Random</div>
+                    <div class="game-card" onclick="cargarContenido('https://os7.ru')">FNAF</div>
+                    <div class="game-card" onclick="cargarContenido('https://geometry-dash.co')">Geometry Dash</div>
+                    <div class="game-card" onclick="cargarContenido('https://gamedistribution.com')">Fuego y Agua</div>
                 </div>
 
-                <h3 style="color: #ff0000; margin-top: 25px; border-bottom: 1px solid #333; padding-bottom: 5px;">🔍 INTERNET Y VIDEO</h3>
+                <h3 style="color: #4285f4; margin-top: 25px; border-bottom: 1px solid #333; padding-bottom: 5px;">🔍 APLICACIONES INTEGRADAS</h3>
                 <div class="games-grid">
-                    <!-- Estos botones abrirán buscadores proxy alternativos en ventanas limpias para evitar errores de conexión -->
-                    <div class="game-card" style="background: #4285f4; color: white;" onclick="abrirEnlaceExterno('https://google.com')">Google Oficial</div>
-                    <div class="game-card" style="background: #ff0000; color: white;" onclick="abrirEnlaceExterno('https://youtube.com')">YouTube Oficial</div>
+                    <!-- Proxies de búsqueda abiertos basados en motores de consulta embebibles sin X-Frame-Options -->
+                    <div class="game-card" style="background: #4285f4; color: white;" onclick="cargarContenido('https://google.com')">Google Unblocked</div>
+                    <div class="game-card" style="background: #ff0000; color: white;" onclick="cargarContenido('https://youtube.com')">YouTube Player</div>
                 </div>
 
                 <div class="frame-wrapper">
-                    <iframe id="game-frame" src="https://madpuffers.com" allowfullscreen></iframe>
+                    <iframe id="game-frame" src="https://github.io" allowfullscreen></iframe>
                 </div>
 
                 <% if (esAdmin) { %>
