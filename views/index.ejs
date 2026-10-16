@@ -12,55 +12,22 @@
         .title-main { color: #00bcff; font-size: 28px; margin-bottom: 5px; font-weight: bold; text-shadow: 0 0 10px rgba(0,188,255,0.3); }
         .badge { background: #fff; color: #000; font-weight: bold; padding: 3px 8px; border-radius: 5px; font-size: 12px; vertical-align: middle; }
         
-        input[type="email"], input[type="submit"], select { padding: 14px; margin: 10px 0; width: 95%; border-radius: 8px; border: 1px solid #444; background: #252525; color: white; box-sizing: border-box; font-size: 14px; }
+        input[type="email"], input[type="text"], input[type="submit"], select { padding: 14px; margin: 10px 0; width: 95%; border-radius: 8px; border: 1px solid #444; background: #252525; color: white; box-sizing: border-box; font-size: 14px; }
         input[type="submit"] { background: #00e676; color: black; font-weight: bold; cursor: pointer; border: none; transition: 0.2s; }
         
         .btn-magic { background: #007bff; color: white; padding: 14px; border-radius: 8px; text-decoration: none; display: inline-block; font-weight: bold; margin: 8px 0; width: 95%; cursor: pointer; border: none; font-size: 14px; }
         
         .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; margin: 20px 0; padding: 10px; }
-        .game-card { background: #252525; padding: 15px; border-radius: 10px; border: 1px solid #444; cursor: pointer; font-weight: bold; transition: 0.2s; font-size: 14px; display: flex; align-items: center; justify-content: center; min-height: 50px; }
+        .game-card { background: #252525; padding: 15px; border-radius: 10px; border: 1px solid #444; cursor: pointer; font-weight: bold; transition: 0.2s; font-size: 14px; display: flex; align-items: center; justify-content: center; min-height: 50px; text-decoration: none; color: white; }
         .game-card:hover { background: #00bcff; color: black; border-color: #00bcff; }
-        
-        .frame-wrapper { margin-top: 25px; border: 3px solid #333; border-radius: 12px; background: #000; overflow: hidden; position: relative; }
-        iframe { width: 100%; height: 600px; border: none; background: #000; }
         
         .admin-panel { margin-top: 40px; border-top: 2px dashed #444; padding-top: 20px; background: #1a1a1a; padding: 20px; border-radius: 8px; text-align: left; }
     </style>
-    <script>
-        function cargarContenido(url) {
-            var frame = document.getElementById('game-frame');
-            frame.src = url;
-            frame.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // FUNCIÓN ANTI-BLOQUEO MEJORADA: Duplica la vista de juego limpia en modo fantasma sin romper las rutas de acceso
-        function abrirAboutBlank() {
-            var win = window.open();
-            if (win) {
-                win.document.title = "Inici - Classroom";
-                var link = win.document.createElement('link');
-                link.rel = 'icon';
-                link.href = 'https://gstatic.com';
-                win.document.head.appendChild(link);
-
-                var iframe = win.document.createElement('iframe');
-                iframe.src = window.location.origin;
-                iframe.style.width = "100vw";
-                iframe.style.height = "100vh";
-                iframe.style.border = "none";
-                iframe.style.margin = "0";
-                
-                win.document.body.style.margin = "0";
-                win.document.body.style.overflow = "hidden";
-                win.document.body.appendChild(iframe);
-            }
-        }
-    </script>
 </head>
 <body>
 
     <div class="top-bar">
-        [10/16/2026] Servidores de emulación estables configurados.
+        [10/16/2026] Catálogo optimizado. Navegación directa configurada para evitar errores de conexión de red.
     </div>
 
     <div class="container">
@@ -76,28 +43,22 @@
                 <% if (mensaje) { %><p class="error"><%= mensaje %></p><% } %>
             <% } else { %>
                 <div class="title-main">Art Class Enhanced <span class="badge">Live</span></div>
-                
-                <button class="btn-magic" onclick="abrirAboutBlank()">🚀 Open in About:Blank (Modo Oculto)</button>
 
+                <!-- SECCIÓN DE ENLACES EXTERNOS QUE PREVIENEN EL ERROR DE MARCO (IFRAME) -->
                 <h3 style="color: #00bcff; margin-top: 20px; border-bottom: 1px solid #333; padding-bottom: 5px;">🎮 CATÁLOGO DE VIDEOJUEGOS</h3>
                 <div class="games-grid">
-                    <!-- Servidores espejo abiertos que no restringen la carga en Marcos externos -->
-                    <div class="game-card" onclick="cargarContenido('https://github.io')">Basketball Stars</div>
-                    <div class="game-card" onclick="cargarContenido('https://retrobowl.me')">Basket Random</div>
-                    <div class="game-card" onclick="cargarContenido('https://os7.ru')">FNAF</div>
-                    <div class="game-card" onclick="cargarContenido('https://geometry-dash.co')">Geometry Dash</div>
-                    <div class="game-card" onclick="cargarContenido('https://gamedistribution.com')">Fuego y Agua</div>
+                    <a class="game-card" href="https://madpuffers.com" target="_self">Basketball Stars</a>
+                    <a class="game-card" href="https://twoplayergames.org" target="_self">Basket Random</a>
+                    <a class="game-card" href="https://fnaf-online.io" target="_self">FNAF</a>
+                    <a class="game-card" href="https://geometrydash.io" target="_self">Geometry Dash</a>
+                    <a class="game-card" href="https://subway-surfers.io" target="_self">Fuego y Agua</a>
                 </div>
 
-                <h3 style="color: #4285f4; margin-top: 25px; border-bottom: 1px solid #333; padding-bottom: 5px;">🔍 APLICACIONES INTEGRADAS</h3>
+                <h3 style="color: #4285f4; margin-top: 25px; border-bottom: 1px solid #333; padding-bottom: 5px;">🔍 INTERNET Y VIDEO DIRECTO</h3>
                 <div class="games-grid">
-                    <!-- Proxies de búsqueda abiertos basados en motores de consulta embebibles sin X-Frame-Options -->
-                    <div class="game-card" style="background: #4285f4; color: white;" onclick="cargarContenido('https://google.com')">Google Unblocked</div>
-                    <div class="game-card" style="background: #ff0000; color: white;" onclick="cargarContenido('https://youtube.com')">YouTube Player</div>
-                </div>
-
-                <div class="frame-wrapper">
-                    <iframe id="game-frame" src="https://github.io" allowfullscreen></iframe>
+                    <!-- Estos elementos procesan la navegación sobre la misma pestaña evitando que Google/YouTube rechacen la señal -->
+                    <a class="game-card" style="background: #4285f4; color: white;" href="https://google.com" target="_self">Google Oficial</a>
+                    <a class="game-card" style="background: #ff0000; color: white;" href="https://youtube.com" target="_self">YouTube Oficial</a>
                 </div>
 
                 <% if (esAdmin) { %>
@@ -114,7 +75,7 @@
                     </div>
                 <% } %>
 
-                <br>
+                <br><br>
                 <a href="/salir" style="color:#666; text-decoration:none; font-size:13px;">Cerrar sesión de estudiante</a>
             <% } %>
         </div>
