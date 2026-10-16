@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Inici - Classroom</title>
-    <link rel="icon" type="image/x-icon" href="https://gstatic.com">
+    <link id="favicon" rel="icon" type="image/x-icon" href="https://gstatic.com">
     <style>
         body { font-family: Arial, sans-serif; background: #121212; color: #fff; text-align: center; margin: 0; padding: 0; overflow-x: hidden; }
         .top-bar { background: #0000ff; color: white; padding: 10px; font-weight: bold; font-size: 14px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
@@ -18,7 +18,7 @@
         .btn-magic { background: #007bff; color: white; padding: 14px; border-radius: 8px; text-decoration: none; display: inline-block; font-weight: bold; margin: 8px 0; width: 95%; cursor: pointer; border: none; font-size: 14px; }
         
         .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; margin: 20px 0; padding: 10px; }
-        .game-card { background: #252525; padding: 15px; border-radius: 10px; border: 1px solid #444; cursor: pointer; font-weight: bold; transition: 0.2s; font-size: 14px; display: flex; align-items: center; justify-content: center; min-height: 50px; color: white; }
+        .game-card { background: #252525; padding: 15px; border-radius: 10px; border: 1px solid #444; cursor: pointer; font-weight: bold; transition: 0.2s; font-size: 14px; display: flex; align-items: center; justify-content: center; min-height: 50px; color: white; text-decoration: none; }
         .game-card:hover { background: #00bcff; color: black; border-color: #00bcff; }
         
         .frame-wrapper { margin-top: 25px; border: 3px solid #333; border-radius: 12px; background: #000; overflow: hidden; position: relative; }
@@ -33,38 +33,21 @@
             frame.scrollIntoView({ behavior: 'smooth' });
         }
 
-        function abrirAboutBlank() {
-            var destino = window.location.href;
-            var win = window.open('about:blank', '_blank');
-            if (win) {
-                win.document.open();
-                win.document.write(`
-                    <!DOCTYPE html>
-                    <html>
-                    <head>
-                        <title>Inici - Classroom</title>
-                        <link rel="icon" type="image/x-icon" href="https://gstatic.com">
-                        <style>
-                            html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #121212; }
-                            iframe { border: none; width: 100%; height: 100%; margin: 0; padding: 0; }
-                        </style>
-                    </head>
-                    <body>
-                        <iframe src="${destino}" allowfullscreen></iframe>
-                    </body>
-                    </html>
-                `);
-                win.document.close();
-            } else {
-                alert("Por favor, habilita las ventanas emergentes en este navegador para activar el modo oculto.");
+        // CAMUFLAJE TOTAL EN ESTA PESTAÑA: Cambia el título e icono de inmediato si pasa un profesor
+        function activarModoPanico() {
+            document.title = "Inici - Classroom";
+            var link = document.getElementById('favicon');
+            if (link) {
+                link.href = "https://gstatic.com";
             }
+            alert("Camuflaje activado. Esta pestaña ahora parece Google Classroom de cara a la barra superior.");
         }
     </script>
 </head>
 <body>
 
     <div class="top-bar">
-        [10/16/2026] Catálogo definitivo actualizado. Usa el modo oculto para proteger tu historial escolar.
+        [10/16/2026] Catálogo definitivo actualizado con enlaces de redirección seguros.
     </div>
 
     <div class="container">
@@ -81,9 +64,9 @@
             <% } else { %>
                 <div class="title-main">Art Class Enhanced <span class="badge">Live</span></div>
                 
-                <button class="btn-magic" onclick="abrirAboutBlank()">🚀 Open in About:Blank (Modo Oculto)</button>
+                <!-- NUEVO BOTÓN DE CAMUFLAJE INSTANTÁNEO -->
+                <button class="btn-magic" onclick="activarModoPanico()">🚨 Botón de Pánico (Disfrazar Pestaña Actual)</button>
 
-                <!-- TU CATÁLOGO EXCLUSIVO MODIFICADO -->
                 <h3 style="color: #00bcff; margin-top: 20px; border-bottom: 1px solid #333; padding-bottom: 5px;">🎮 CATÁLOGO DE VIDEOJUEGOS</h3>
                 <div class="games-grid">
                     <div class="game-card" onclick="cargarContenido('https://twoplayergames.org')">Basket Random</div>
@@ -91,14 +74,14 @@
                     <div class="game-card" onclick="cargarContenido('https://subway-surfers.io')">Fuego y Agua</div>
                 </div>
 
-                <h3 style="color: #4285f4; margin-top: 25px; border-bottom: 1px solid #333; padding-bottom: 5px;">🔍 INTERNET Y VIDEO</h3>
+                <h3 style="color: #4285f4; margin-top: 25px; border-bottom: 1px solid #333; padding-bottom: 5px;">🔍 INTERNET Y VIDEO DIRECTO</h3>
                 <div class="games-grid">
-                    <div class="game-card" style="background: #4285f4; color: white;" onclick="cargarContenido('https://google.com')">Google Unblocked</div>
-                    <div class="game-card" style="background: #ff0000; color: white;" onclick="cargarContenido('https://youtube.com')">YouTube Player</div>
+                    <!-- ENLACES REALES: Al abrirse en pestañas independientes esquivan el error de conexión de internet del recuadro gris -->
+                    <a class="game-card" style="background: #4285f4; color: white;" href="https://google.com" target="_blank">Google Oficial</a>
+                    <a class="game-card" style="background: #ff0000; color: white;" href="https://youtube.com" target="_blank">YouTube Oficial</a>
                 </div>
 
                 <div class="frame-wrapper">
-                    <!-- Ahora carga Basket Random por defecto al entrar -->
                     <iframe id="game-frame" src="https://twoplayergames.org" allowfullscreen></iframe>
                 </div>
 
