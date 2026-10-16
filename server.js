@@ -6,10 +6,10 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// AQUÍ CONFIGURAS TU CORREO DE JEFE/ADMINISTRADOR
-const CORREO_ADMIN = "tu-correo-jefe@gmail.com"; 
+// LLAVE MAESTRA: SÓLO TU CORREO TIENE PODER DE ADMINISTRADOR
+const CORREO_ADMIN = "y.madrid10018@gmail.com"; 
 
-// Listas en memoria
+// Listas en memoria para guardar los datos
 let estudiantesRegistrados = new Set();
 let listaNegra = new Set();
 
@@ -20,20 +20,22 @@ app.get('/', (req, res) => {
 app.post('/acceder', (req, res) => {
     const email = req.body.email.trim().toLowerCase();
 
+    // 1. Validar si el correo está en tu lista negra
     if (listaNegra.has(email)) {
         return res.render('index', { verContenido: false, mensaje: "Acceso denegado. Has sido expulsado.", esAdmin: false });
     }
 
+    // 2. Si eres tú, entras directo con la consola de borrado activada
     if (email === CORREO_ADMIN.toLowerCase()) {
-        return res.render('index', { verContenido: true, mensaje: "Panel de Administrador Activado", esAdmin: true });
+        return res.render('index', { verContenido: true, mensaje: "Consola de Administración Suprema Activada", esAdmin: true });
     }
 
-    // Si no está registrado, se guarda automáticamente para siempre
+    // 3. Si es un alumno normal, se guarda en memoria y entra
     estudiantesRegistrados.add(email);
     res.render('index', { verContenido: true, mensaje: "Estudiante Verificado de Forma Permanente", esAdmin: false });
 });
 
-// Ruta especial que te permite a ti expulsar o eliminar personas
+// Ruta de acción exclusiva para ti
 app.post('/admin-accion', (req, res) => {
     const emailTarget = req.body.emailTarget.trim().toLowerCase();
     const accion = req.body.accion; // "bloquear" o "eliminar"
@@ -43,11 +45,11 @@ app.post('/admin-accion', (req, res) => {
         estudiantesRegistrados.delete(emailTarget);
     } else if (accion === "eliminar") {
         estudiantesRegistrados.delete(emailTarget);
-        listaNegra.delete(emailTarget); // Borrado total
+        listaNegra.delete(emailTarget); // Lo saca de la lista negra si estaba
     }
 
-    // Regresa al modo administrador para seguir gestionando
-    res.render('index', { verContenido: true, mensaje: `Usuario ${emailTarget} procesado con éxito (${accion}).`, esAdmin: true });
+    // Te mantiene dentro de tu interfaz para que sigas gestionando
+    res.render('index', { verContenido: true, mensaje: `El usuario ${emailTarget} fue procesado con éxito (${accion}).`, esAdmin: true });
 });
 
 app.get('/salir', (req, res) => {
@@ -56,5 +58,5 @@ app.get('/salir', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Servidor corriendo en el puerto ${PORT}`);
+    console.log(`Servidor de Art Class corriendo en puerto ${PORT}`);
 });
