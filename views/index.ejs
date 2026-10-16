@@ -25,7 +25,7 @@
         .error-banner { background-color: rgba(255, 77, 77, 0.1); border: 1px solid #ff4d4d; color: #ff4d4d; padding: 14px; border-radius: 8px; font-weight: bold; margin-bottom: 20px; text-align: center; }
         
         .grid-layout { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; margin: 30px 0; }
-        .app-card { background-color: #252525; border: 1px solid #3d3d3d; padding: 20px; border-radius: 12px; cursor: pointer; font-weight: 700; font-size: 15px; display: flex; align-items: center; justify-content: center; min-height: 60px; transition: all 0.2s ease; box-sizing: border-box; text-align: center; }
+        .app-card { background-color: #252525; border: 1px solid #333; padding: 20px; border-radius: 12px; cursor: pointer; font-weight: 700; font-size: 15px; display: flex; align-items: center; justify-content: center; min-height: 60px; transition: all 0.2s ease; box-sizing: border-box; text-align: center; }
         .app-card:hover { background-color: var(--accent-color); color: #000000; border-color: var(--accent-color); transform: translateY(-3px); }
         .card-youtube { background-color: #cc181e; color: white; border-color: #cc181e; }
         .card-google { background-color: #34a853; color: white; border-color: #34a853; }
@@ -45,7 +45,6 @@
             }
         }
 
-        // EL MODO OCULTO REAL DE ART CLASS: Despliega la suite completa clonando el DOM de forma interna en about:blank
         function launchAboutBlankCloak() {
             const currentUrl = window.location.href;
             const newWindow = window.open('about:blank', '_blank');
@@ -61,7 +60,7 @@
                         <style>html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #121212; } iframe { border: none; width: 100%; height: 100%; margin: 0; padding: 0; }</style>
                     </head>
                     <body>
-                        <iframe src="${currentUrl}" allowfullscreen="true" allow="autoplay; fullscreen"></iframe>
+                        <iframe src="\${currentUrl}" allowfullscreen="true" allow="autoplay; fullscreen"></iframe>
                     </body>
                     </html>
                 `);
@@ -99,7 +98,6 @@
             <% } else { %>
                 <div class="title-enhanced">Art Class Enhanced<span class="early-access-badge" style="background-color: #00e676;">Live</span></div>
                 
-                <!-- BOTÓN PRINCIPAL DE INCOGNITO -->
                 <button class="btn-action btn-cloak" onclick="launchAboutBlankCloak()">🚀 Open in About:Blank (Modo Oculto)</button>
 
                 <h3 style="color: var(--accent-color); text-align: left; margin-top: 30px; font-weight: 800; border-bottom: 1px solid #2d2d2d; padding-bottom: 8px;">🎮 UNBLOCKED GAMES</h3>
@@ -111,7 +109,6 @@
 
                 <h3 style="color: #ffffff; text-align: left; margin-top: 30px; font-weight: 800; border-bottom: 1px solid #2d2d2d; padding-bottom: 8px;">🔍 APPS & SEARCH ENGINES</h3>
                 <div class="grid-layout">
-                    <!-- Proxies avanzados de red que puentean los iframes directamente desde tu servidor express -->
                     <div class="app-card card-google" onclick="updateDisplayFrame('/gsites.html?url=' + encodeURIComponent('https://duckduckgo.com'))">Google Safe Proxy</div>
                     <div class="app-card card-youtube" onclick="updateDisplayFrame('/gsites.html?url=' + encodeURIComponent('https://duckduckgo.com?q=site:youtube.com'))">YouTube Net Proxy</div>
                 </div>
@@ -127,3 +124,6 @@
                         <form action="/admin-accion" method="POST">
                             <input type="email" name="emailTarget" placeholder="Correo electrónico del alumno..." required>
                             <select name="accion">
+                                <option value="bloquear">🚫 Expulsar y Bloquear (Lista Negra)</option>
+                                <option value="eliminar">♻️ Perdonar / Restablecer Permisos</option>
+                            </select>
