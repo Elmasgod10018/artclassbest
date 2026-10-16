@@ -17,9 +17,8 @@
         
         .btn-magic { background: #007bff; color: white; padding: 14px; border-radius: 8px; text-decoration: none; display: inline-block; font-weight: bold; margin: 8px 0; width: 95%; cursor: pointer; border: none; font-size: 14px; }
         
-        /* Zona del catálogo de videojuegos */
-        .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px; margin: 20px 0; padding: 10px; }
-        .game-card { background: #252525; padding: 15px; border-radius: 10px; border: 1px solid #444; cursor: pointer; font-weight: bold; transition: 0.2s; font-size: 14px; }
+        .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; margin: 20px 0; padding: 10px; }
+        .game-card { background: #252525; padding: 15px; border-radius: 10px; border: 1px solid #444; cursor: pointer; font-weight: bold; transition: 0.2s; font-size: 14px; display: flex; align-items: center; justify-content: center; min-height: 50px; }
         .game-card:hover { background: #00bcff; color: black; border-color: #00bcff; }
         
         .frame-wrapper { margin-top: 25px; border: 3px solid #333; border-radius: 12px; background: #000; overflow: hidden; position: relative; }
@@ -34,26 +33,30 @@
             frame.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Sistema alternativo compatible para abrir en una ventana oculta limpia
         function abrirAboutBlank() {
-            var destino = window.location.origin;
-            var win = window.open('about:blank', '_blank');
+            var destino = window.location.href;
+            var win = window.open();
             if (win) {
-                win.document.open();
-                win.document.write(`
-                    <!DOCTYPE html>
-                    <html>
-                    <head>
-                        <title>Inici - Classroom</title>
-                        <link rel="icon" type="image/x-icon" href="https://gstatic.com">
-                        <style>html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;}iframe{border:none;width:100%;height:100%;}</style>
-                    </head>
-                    <body><iframe src="${destino}"></iframe></body>
-                    </html>
-                `);
-                win.document.close();
+                win.document.title = "Inici - Classroom";
+                
+                var link = win.document.createElement('link');
+                link.rel = 'icon';
+                link.href = 'https://gstatic.com';
+                win.document.head.appendChild(link);
+
+                var iframe = win.document.createElement('iframe');
+                iframe.src = destino;
+                iframe.style.width = "100vw";
+                iframe.style.height = "100vh";
+                iframe.style.border = "none";
+                iframe.style.margin = "0";
+                iframe.style.padding = "0";
+                
+                win.document.body.style.margin = "0";
+                win.document.body.style.overflow = "hidden";
+                win.document.body.appendChild(iframe);
             } else {
-                alert("Por favor habilita las ventanas emergentes del navegador.");
+                alert("Habilita las ventanas emergentes del navegador.");
             }
         }
     </script>
@@ -61,7 +64,7 @@
 <body>
 
     <div class="top-bar">
-        [10/16/2026] Transport settings have been fixed and the styling has been improved. Website not working/blocked? Join Discord!
+        [10/16/2026] Roster configuration updated. Enjoy unlocked apps responsibly.
     </div>
 
     <div class="container">
@@ -80,25 +83,23 @@
                 
                 <button class="btn-magic" onclick="abrirAboutBlank()">🚀 Open in About:Blank (Modo Oculto)</button>
 
-                <!-- SECCIÓN DE VIDEOJUEGOS DIRECTOS DESBLOQUEADOS -->
-                <h3 style="color: #00bcff; margin-top: 20px; border-bottom: 1px solid #333; padding-bottom: 5px;">🎮 CATÁLOGO DE VIDEOJUEGOS</h3>
+                <!-- TU CATÁLOGO EXCLUSIVO CON YOUTUBE INCLUIDO -->
+                <h3 style="color: #00bcff; margin-top: 20px; border-bottom: 1px solid #333; padding-bottom: 5px;">🎮 CATÁLOGO DE VIDEOJUEGOS Y APPS</h3>
                 <div class="games-grid">
-                    <div class="game-card" onclick="cargarContenido('https://googleusercontent.com')">Friv Games</div>
-                    <div class="game-card" onclick="cargarContenido('https://freeorion.org')">Roblox Clone</div>
-                    <div class="game-card" onclick="cargarContenido('https://github.io')">8 Ball Pool</div>
-                    <div class="game-card" onclick="cargarContenido('https://voxiom.io')">Among Us Style</div>
-                    <div class="game-card" onclick="cargarContenido('https://bitlifeonline.com')">BitLife</div>
+                    <div class="game-card" onclick="cargarContenido('https://googleusercontent.com')">Basketball Stars</div>
+                    <div class="game-card" onclick="cargarContenido('https://googleusercontent.com')">Basket Random</div>
+                    <div class="game-card" onclick="cargarContenido('https://googleusercontent.com')">FNAF</div>
+                    <div class="game-card" onclick="cargarContenido('https://googleusercontent.com')">Geometry Dash</div>
+                    <div class="game-card" onclick="cargarContenido('https://googleusercontent.com')">Fuego y Agua</div>
+                    <div class="game-card" style="background: #ff0000; color: white;" onclick="cargarContenido('https://googleusercontent.com')">YouTube Proxy</div>
                 </div>
 
-                <!-- SECCIÓN DE MULTIMEDIA Y BUSCADOR -->
-                <h3 style="color: #ff0000; margin-top: 25px; border-bottom: 1px solid #333; padding-bottom: 5px;">📺 MULTIMEDIA DESBLOQUEADA</h3>
+                <h3 style="color: #4285f4; margin-top: 25px; border-bottom: 1px solid #333; padding-bottom: 5px;">🔍 INTERNET DESBLOQUEADO</h3>
                 <div class="games-grid" style="grid-template-columns: 1fr;">
-                    <!-- Reproductor incrustable limpio que no activa bloqueos -->
-                    <div class="game-card" style="background: #ff0000; color: white;" onclick="cargarContenido('https://youtube.com')">Abrir Reproductor YouTube Libre</div>
+                    <div class="game-card" style="background: #4285f4; color: white;" onclick="cargarContenido('https://google.com')">Google Unblocked</div>
                 </div>
 
                 <div class="frame-wrapper">
-                    <!-- Marco interactivo donde se cargará el juego o vídeo seleccionado -->
                     <iframe id="game-frame" src="https://googleusercontent.com" allowfullscreen></iframe>
                 </div>
 
