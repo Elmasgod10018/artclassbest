@@ -3,140 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inici - Classroom</title>
+    <title>Home - Classroom</title>
     <link rel="icon" type="image/x-icon" href="https://gstatic.com">
     <style>
-        :root { --bg-primary: #121212; --bg-secondary: #1e1e1e; --accent-color: #00bcff; --text-color: #ffffff; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-primary); color: var(--text-color); margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; }
-        .top-bar { background-color: #0000ff; color: #ffffff; padding: 12px; font-weight: bold; font-size: 14px; text-align: center; position: relative; box-shadow: 0 2px 10px rgba(0,0,0,0.5); z-index: 100; }
-        .main-container { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; box-sizing: border-box; }
-        .content-box { background-color: var(--bg-secondary); padding: 40px; border-radius: 16px; border: 1px solid #2d2d2d; box-shadow: 0 15px 35px rgba(0,0,0,0.6); max-width: 1000px; width: 100%; box-sizing: border-box; text-align: center; }
-        .title-enhanced { font-size: 32px; font-weight: 800; color: var(--accent-color); margin-bottom: 10px; text-shadow: 0 0 15px rgba(0, 188, 255, 0.4); }
-        .early-access-badge { background-color: #ffffff; color: #000000; font-size: 12px; font-weight: bold; padding: 4px 10px; border-radius: 6px; text-transform: uppercase; vertical-align: middle; margin-left: 8px; }
-        .sub-description { color: #aaaaaa; font-size: 14px; margin-bottom: 30px; line-height: 1.6; }
-        .form-group input[type="email"] { width: 100%; padding: 16px; background-color: #252525; border: 1px solid #3d3d3d; border-radius: 8px; color: #fff; font-size: 16px; box-sizing: border-box; margin-bottom: 15px; outline: none; }
-        .btn-action { width: 100%; padding: 16px; border-radius: 8px; border: none; font-size: 16px; font-weight: bold; cursor: pointer; display: block; margin: 10px 0; box-sizing: border-box; text-decoration: none; text-align: center; }
-        .btn-submit { background-color: #00e676; color: #000000; }
-        .btn-cloak { background-color: #007bff; color: #ffffff; }
+        :root { --bg-dark: #0b0b0c; --panel-bg: #16161a; --accent-blue: #00bcff; --orange-bar: #ff6b00; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-dark); color: #fff; margin: 0; padding: 0; overflow: hidden; height: 100vh; display: flex; flex-direction: column; }
         
-        .grid-layout { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; margin: 30px 0; }
-        .app-card { background-color: #252525; border: 1px solid #333; padding: 20px; border-radius: 12px; cursor: pointer; font-weight: 700; font-size: 15px; display: flex; align-items: center; justify-content: center; min-height: 60px; transition: all 0.2s ease; box-sizing: border-box; }
-        .app-card:hover { background-color: var(--accent-color); color: #000000; border-color: var(--accent-color); transform: translateY(-3px); }
-        .card-youtube { background-color: #cc181e; color: white; border-color: #cc181e; }
-        .card-google { background-color: #34a853; color: white; border-color: #34a853; }
+        /* Barra de anuncios superior naranja */
+        .orange-announcement { background: var(--orange-bar); color: #fff; padding: 8px; font-weight: bold; font-size: 13px; text-align: center; position: relative; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+        .orange-announcement .close-btn { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #fff; }
 
-        /* PANTALLA MUCHO MÁS GRANDE Y ANCHA */
-        .viewer-frame-container { margin-top: 30px; border: 4px solid #2d2d2d; border-radius: 14px; overflow: hidden; background-color: #000; }
-        .viewer-frame-container iframe { width: 100%; height: 750px; border: none; display: block; }
+        /* Barra de navegación interna del sistema operativo virtual */
+        .virtual-browser-bar { background-color: #121214; padding: 8px 15px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #222; }
+        .browser-actions { display: flex; align-items: center; gap: 10px; }
+        .nav-btn { background: #222; border: none; color: #fff; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: bold; }
+        .nav-btn:hover { background: #333; }
+        .address-bar-input { background: #1a1a1e; border: 1px solid #333; border-radius: 20px; padding: 6px 20px; width: 450px; color: #fff; outline: none; font-size: 13px; text-align: left; }
+
+        /* Contenedor principal estilo Escritorio */
+        .desktop-viewport { flex: 1; display: flex; position: relative; background-image: radial-gradient(#1e1e24 1px, transparent 0); background-size: 24px 24px; }
         
-        .admin-console-box { margin-top: 45px; border-top: 2px dashed #444; padding-top: 25px; text-align: left; background-color: #161616; padding: 20px; border-radius: 10px; border: 1px solid #252525; }
-        .admin-console-box select, .admin-console-box input[type="email"] { width: 100%; padding: 12px; background: #222; border: 1px solid #444; color: #fff; border-radius: 6px; margin-bottom: 12px; box-sizing: border-box; }
+        /* Menú lateral izquierdo de iconos rápidos */
+        .sidebar-dock { width: 60px; background: #121214; border-right: 1px solid #222; display: flex; flex-direction: column; align-items: center; padding-top: 20px; gap: 15px; }
+        .dock-icon { width: 34px; height: 34px; background: #222; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; transition: 0.2s; }
+        .dock-icon:hover { background: var(--accent-blue); transform: scale(1.05); }
+
+        /* Zona central interactiva */
+        .desktop-content { flex: 1; padding: 30px; display: flex; flex-direction: column; align-items: center; overflow-y: auto; box-sizing: border-box; }
+        
+        /* Tarjeta de bienvenida principal */
+        .welcome-panel { background: rgba(22, 22, 26, 0.95); border: 1px solid #2d2d35; border-radius: 16px; padding: 30px; max-width: 850px; width: 100%; box-shadow: 0 20px 40px rgba(0,0,0,0.7); text-align: center; box-sizing: border-box; }
+        .main-heading { font-size: 34px; font-weight: 800; color: #fff; margin-bottom: 20px; letter-spacing: -0.5px; }
+        .heading-blue { color: var(--accent-blue); }
+
+        /* Mosaico de accesos rápidos superiores (Roblox, Fortnite...) */
+        .apps-shortcut-row { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
+        .shortcut-tile { width: 65px; height: 65px; background: #25252b; border-radius: 12px; overflow: hidden; cursor: pointer; border: 1px solid #333; transition: 0.2s; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; }
+        .shortcut-tile:hover { transform: translateY(-4px); border-color: var(--accent-blue); }
+
+        /* Parrilla grande de Actividades (Google, YouTube, Twitch...) */
+        .section-title { text-align: left; width: 100%; max-width: 850px; font-size: 24px; font-weight: 800; margin: 25px 0 10px 0; color: #fff; display: flex; align-items: center; gap: 10px; }
+        .section-subtitle { text-align: left; width: 100%; max-width: 850px; color: #aaa; font-size: 13px; margin-bottom: 15px; }
+        .activities-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 16px; width: 100%; max-width: 850px; margin-bottom: 30px; }
+        
+        .activity-card { background: #1c1c22; border: 1px solid #2d2d35; border-radius: 12px; padding: 25px 15px; text-align: center; cursor: pointer; font-weight: bold; font-size: 16px; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 90px; box-sizing: border-box; }
+        .activity-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
+        .card-g { background: #ffffff; color: #000; }
+        .card-yt { background: #ffffff; color: #ff0000; }
+        .card-twitch { background: #6441a5; color: #fff; }
+        .card-poki { background: #34a853; color: #fff; }
+
+        /* Iframe contenedor que carga las webs por debajo */
+        .workspace-frame-holder { width: 100%; max-width: 850px; border: 2px solid #2d2d35; border-radius: 12px; overflow: hidden; background: #000; margin-top: 20px; display: none; }
+        .workspace-frame-holder iframe { width: 100%; height: 600px; border: none; display: block; background: #fff; }
+
+        .admin-box-lock { width: 100%; max-width: 850px; background: #16161a; border: 1px dashed #444; border-radius: 12px; padding: 20px; margin-top: 40px; box-sizing: border-box; text-align: left; }
+        .admin-box-lock input, .admin-box-lock select { padding: 12px; background: #222; border: 1px solid #333; color: #fff; border-radius: 6px; margin: 8px 0; width: 100%; box-sizing: border-box; }
+        
+        /* Zona de login inicial */
+        .login-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #0b0b0c; z-index: 1000; display: flex; align-items: center; justify-content: center; }
     </style>
     <script>
-        function updateDisplayFrame(targetUrl) {
-            const frame = document.getElementById('display-viewport');
-            if (frame) { frame.src = targetUrl; frame.scrollIntoView({ behavior: 'smooth' }); }
+        function openSystemUrl(url) {
+            document.getElementById('display-canvas-wrapper').style.display = 'block';
+            const iframe = document.getElementById('workspace-viewport');
+            iframe.src = url;
+            document.getElementById('current-address-bar').value = url;
+            iframe.scrollIntoView({ behavior: 'smooth' });
         }
 
-        function launchAboutBlankCloak() {
-            const currentUrl = window.location.href;
-            const newWindow = window.open('about:blank', '_blank');
-            if (newWindow) {
-                newWindow.document.open();
-                newWindow.document.write(`
+        // EL BOTÓN OCULTO PERFECTO: Abre about:blank y clona este sistema operativo virtual dentro de forma limpia
+        function openInAboutBlank() {
+            const pageUrl = window.location.href;
+            const ghostWindow = window.open('about:blank', '_blank');
+            if (ghostWindow) {
+                ghostWindow.document.open();
+                ghostWindow.document.write(`
                     <!DOCTYPE html>
-                    <html lang="en">
+                    <html>
                     <head>
-                        <meta charset="UTF-8">
-                        <title>Inici - Classroom</title>
+                        <title>Home - Classroom</title>
                         <link rel="icon" type="image/x-icon" href="https://gstatic.com">
-                        <style>html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #121212; } iframe { border: none; width: 100%; height: 100%; margin: 0; padding: 0; }</style>
+                        <style>html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; } iframe { border: none; width: 100%; height: 100%; margin: 0; padding: 0; }</style>
                     </head>
                     <body>
-                        <iframe src="${currentUrl}" allowfullscreen="true" allow="autoplay; fullscreen"></iframe>
+                        <iframe src="${pageUrl}" allowfullscreen="true" allow="autoplay; fullscreen"></iframe>
                     </body>
                     </html>
                 `);
-                newWindow.document.close();
+                ghostWindow.document.close();
             }
         }
 
-        function entrarInvitado(e) {
-            e.preventDefault();
-            document.getElementById('login-zone').style.display = 'none';
-            document.getElementById('app-zone').style.display = 'block';
+        function verifyLoginSession(event) {
+            event.preventDefault();
+            document.getElementById('gatekeeper-login').style.display = 'none';
             
-            const email = document.getElementById('student-email').value.trim().toLowerCase();
-            if (email === "y.madrid10018@gmail.com") {
-                document.getElementById('master-admin-box').style.display = 'block';
+            const emailInput = document.getElementById('session-email').value.trim().toLowerCase();
+            if (emailInput === "y.madrid10018@gmail.com") {
+                document.getElementById('owner-console').style.display = 'block';
             }
         }
     </script>
 </head>
 <body>
 
-    <div class="top-bar">
-        [10/16/2026] Transport settings have been fixed and the styling has been improved. Website not working/blocked? Join Discord!
-    </div>
-
-    <div class="main-container">
-        <div class="content-box">
-            
-            <!-- ZONA 1: INICIO DE SESIÓN -->
-            <div id="login-zone">
-                <div class="title-enhanced">Welcome to Art Class Enhanced<span class="early-access-badge">early access!</span></div>
-                <div class="sub-description">
-                    It has been 2 years since the development of Art Class Enhanced started.<br>
-                    <strong>Be responsible. (Use during free time or with permission from your teacher.)</strong>
-                </div>
-
-                <form onsubmit="entrarInvitado(event)" class="form-group">
-                    <input type="email" id="student-email" placeholder="Enter student email to verify..." required>
-                    <button type="submit" class="btn-action btn-submit">PLAY / ENTRAR</button>
-                </form>
-            </div>
-
-            <!-- ZONA 2: APLICACIONES Y JUEGOS -->
-            <div id="app-zone" style="display: none;">
-                <div class="title-enhanced">Art Class Enhanced<span class="early-access-badge" style="background-color: #00e676;">Live</span></div>
-                
-                <button class="btn-action btn-cloak" onclick="launchAboutBlankCloak()">🚀 Open in About:Blank (Modo Oculto)</button>
-
-                <h3 style="color: var(--accent-color); text-align: left; margin-top: 30px; font-weight: 800; border-bottom: 1px solid #2d2d2d; padding-bottom: 8px;">... UNBLOCKED GAMES</h3>
-                <div class="grid-layout">
-                    <div class="app-card" onclick="updateDisplayFrame('https://twoplayergames.org')">Basket Random</div>
-                    <div class="app-card" onclick="updateDisplayFrame('https://fnaf-online.io')">FNAF Online</div>
-                    <div class="app-card" onclick="updateDisplayFrame('https://subway-surfers.io')">Fuego y Agua</div>
-                </div>
-
-                <h3 style="color: #ffffff; text-align: left; margin-top: 30px; font-weight: 800; border-bottom: 1px solid #2d2d2d; padding-bottom: 8px;">... APPS & SEARCH ENGINES</h3>
-                <div class="grid-layout">
-                    <!-- GOOGLE DESBLOQUEADO SIN ERRORES DE CONEXIÓN -->
-                    <div class="app-card card-google" onclick="updateDisplayFrame('https://google.com')">Google Safe Proxy</div>
-                    <div class="app-card card-youtube" onclick="updateDisplayFrame('https://duckduckgo.com')">YouTube Net Proxy</div>
-                </div>
-
-                <div class="viewer-frame-container">
-                    <iframe id="display-viewport" src="https://twoplayergames.org" allowfullscreen="true"></iframe>
-                </div>
-
-                <!-- CONSOLA DE ADMINISTRADOR SUPREMA -->
-                <div id="master-admin-box" class="admin-console-box" style="display: none;">
-                    <h3 style="color: var(--accent-color); margin-top: 0; font-weight: 800;">... Consola de Administración Suprema</h3>
-                    <p style="color: #aaa; font-size: 13px;">Panel exclusivo para la cuenta maestra de control de accesos estudiantiles.</p>
-                    <form action="/admin-accion" method="POST">
-                        <input type="email" name="emailTarget" placeholder="Correo electrónico del alumno..." required>
-                        <select name="accion">
-                            <option value="bloquear">🚫 Expulsar y Bloquear (Lista Negra)</option>
-                            <option value="eliminar">... Perdonar / Restablecer Permisos</option>
-                        </select>
-                        <button type="submit" class="btn-action" style="background-color: #dc3545; color: #fff; margin-top: 5px; padding: 12px;">Ejecutar Acción</button>
-                    </form>
-                </div>
-
-                <br>
-                <a href="/" style="color: #666; text-decoration: none; font-size: 13px;">Cerrar sesión de estudiante</a>
-            </div>
-
+    <!-- ZONA INICIAL DE ENTRADA -->
+    <div id="gatekeeper-login" class="login-overlay">
+        <div class="welcome-panel" style="max-width: 450px;">
+            <div class="main-heading" style="font-size: 26px;">Welcome to <span class="heading-blue">Art Class Enhanced</span></div>
+            <form onsubmit="verifyLoginSession(event)">
+                <input type="email" id="session-email" placeholder="Enter student email to verify..." required style="width: 100%; padding: 14px; background: #222; border: 1px solid #333; color: #fff; border-radius: 8px; margin-bottom: 15px; box-sizing: border-box;">
+                <button type="submit" style="width: 100%; padding: 14px; background: #00e676; border: none; font-weight: bold; border-radius: 8px; cursor: pointer;">PLAY / ENTRAR</button>
+            </form>
         </div>
     </div>
+
+    <!-- ANUNCIO SUPERIOR RECREADO -->
+    <div class="orange-announcement">
+        [10/19/2026] Reimplemented emulator and added toasts... No more updates this month. Is something broken? <span style="text-decoration: underline; cursor: pointer;">Join Discord!</span>
+        <span class="close-btn">[Close]</span>
+    </div>
+
+    <!-- BARRA DE ACCIONES SUPERIOR -->
+    <div class="virtual-browser-bar">
+        <div class="browser-actions">
+            <button class="nav-btn" onclick="location.reload()">🏠 Exit / Home</button>
+            <button class="nav-btn" onclick="openInAboutBlank()" style="background: #007bff;">🚀 Open in About:Blank</button>
+            <button class="nav-btn" style="background: #ff4d4d;">⚙️ Panic Button</button>
+        </div>
+        <input type="text" id="current-address-bar" class="address-bar-input" value="about:blank" readonly>
+        <div style="font-weight: bold; font-size: 14px; color: #aaa;">12:19 PM</div>
+    </div>
+
+    <div class="desktop-viewport">
+        <!-- DOCK LATERAL DE ICONOS -->
+        <div class="sidebar-dock">
