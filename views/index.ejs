@@ -31,7 +31,7 @@
         .heading-blue { color: var(--accent-blue); }
 
         .apps-shortcut-row { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
-        .shortcut-tile { width: 65px; height: 65px; background: #25252b; border-radius: 12px; overflow: hidden; cursor: pointer; border: 1px solid #333; transition: 0.2s; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; }
+        .shortcut-tile { width: 65px; height: 65px; background: #25252b; border-radius: 12px; overflow: hidden; cursor: pointer; border: 1px solid #333; transition: 0.2s; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: bold; }
         .shortcut-tile:hover { transform: translateY(-4px); border-color: var(--accent-blue); }
 
         .section-title { text-align: left; width: 100%; max-width: 850px; font-size: 24px; font-weight: 800; margin: 25px 0 5px 0; color: #fff; }
@@ -46,7 +46,7 @@
         .card-poki { background: #34a853; color: #fff; }
 
         .workspace-frame-container { width: 100%; max-width: 850px; border: 2px solid #2d2d35; border-radius: 12px; overflow: hidden; background: #000; margin-top: 20px; display: none; }
-        .workspace-frame-container iframe { width: 100%; height: 600px; border: none; display: block; background: #fff; }
+        .workspace-frame-container iframe { width: 100%; height: 650px; border: none; display: block; background: #fff; }
 
         .admin-box-lock { width: 100%; max-width: 850px; background: #16161a; border: 1px dashed #444; border-radius: 12px; padding: 20px; margin-top: 40px; box-sizing: border-box; text-align: left; }
         .admin-box-lock input, .admin-box-lock select { padding: 12px; background: #222; border: 1px solid #333; color: #fff; border-radius: 6px; margin: 8px 0; width: 100%; box-sizing: border-box; }
@@ -59,7 +59,7 @@
             const iframe = document.getElementById('workspace-viewport');
             iframe.src = url;
             document.getElementById('current-address-bar').value = url;
-            iframe.scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('display-canvas-wrapper').scrollIntoView({ behavior: 'smooth' });
         }
 
         function openInAboutBlank() {
@@ -126,9 +126,9 @@
         <div class="sidebar-dock">
             <div class="dock-icon" onclick="location.reload()">🏠</div>
             <div class="dock-icon" onclick="openInAboutBlank()">🚀</div>
-            <div class="dock-icon">🎮</div>
-            <div class="dock-icon">📥</div>
-            <div class="dock-icon">ℹ️</div>
+            <div class="dock-icon" onclick="openSystemUrl('https://twoplayergames.org')">🎮</div>
+            <div class="dock-icon" onclick="openSystemUrl('https://fnaf-online.io')">🐻</div>
+            <div class="dock-icon" onclick="openSystemUrl('https://subway-surfers.io')">🔥</div>
         </div>
 
         <div class="desktop-content">
@@ -136,5 +136,3 @@
                 <div class="main-heading">Welcome to <span class="heading-blue">Art Class Enhanced</span></div>
                 
                 <div class="apps-shortcut-row">
-                    <div class="shortcut-tile" onclick="openSystemUrl('https://freeorion.org')">🎮</div>
-                    <div class="shortcut-tile" onclick="openSystemUrl('https://twoplayergames.org')">🏀</div>
