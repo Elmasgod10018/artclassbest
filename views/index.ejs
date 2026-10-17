@@ -6,13 +6,12 @@
     <title>Home - Classroom</title>
     <link rel="icon" type="image/x-icon" href="https://gstatic.com">
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #0b0b0c; color: #fff; margin: 0; padding: 0; overflow: hidden; height: 100vh; display: flex; flex-direction: column; }
+        :root { --bg-dark: #0b0b0c; --panel-bg: #16161a; --accent-blue: #00bcff; --orange-bar: #ff6b00; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-dark); color: #fff; margin: 0; padding: 0; overflow: hidden; height: 100vh; display: flex; flex-direction: column; }
         
-        /* Barra superior de alertas original */
-        .top-announcement-bar { background: #ff6b00; color: #fff; padding: 10px; font-weight: bold; font-size: 13px; text-align: center; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.4); z-index: 10; }
-        .top-announcement-bar .close-link { position: absolute; right: 25px; top: 50%; transform: translateY(-50%); color: #fff; cursor: pointer; text-decoration: none; }
+        .orange-announcement { background: var(--orange-bar); color: #fff; padding: 10px; font-weight: bold; font-size: 13px; text-align: center; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.4); z-index: 10; }
+        .orange-announcement .close-link { position: absolute; right: 25px; top: 50%; transform: translateY(-50%); color: #fff; cursor: pointer; text-decoration: none; }
 
-        /* Consola superior de navegación virtual */
         .system-navigation-header { background-color: #121214; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #202024; }
         .action-controls { display: flex; align-items: center; gap: 12px; }
         .control-btn { background: #1c1c1e; border: 1px solid #2c2c2e; color: #fff; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: bold; transition: background 0.2s; }
@@ -23,29 +22,23 @@
         .btn-panic-alert:hover { background: #cc0000; }
         .system-url-display { background: #1a1a1e; border: 1px solid #2d2d35; border-radius: 20px; padding: 6px 25px; width: 450px; color: #aaa; outline: none; font-size: 13px; text-align: left; }
 
-        /* Capa del Escritorio */
         .main-desktop-area { flex: 1; display: flex; position: relative; background-image: radial-gradient(#1e1e24 1px, transparent 0); background-size: 24px 24px; overflow: hidden; }
         
-        /* Dock izquierdo completo */
-        .dock-navigation-rail { width: 65px; background: #121214; border-right: 1px solid #202024; display: flex; flex-direction: column; align-items: center; padding-top: 25px; gap: 18px; }
+        .sidebar-dock { width: 65px; background: #121214; border-right: 1px solid #202024; display: flex; flex-direction: column; align-items: center; padding-top: 25px; gap: 18px; }
         .dock-item-button { width: 38px; height: 34px; background: #1c1c1e; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; transition: 0.2s; border: 1px solid #2c2c2e; }
         .dock-item-button:hover, .dock-active { background: #00bcff; color: #000; border-color: #00bcff; transform: scale(1.05); }
 
-        /* Contenido interactivo central */
         .viewport-dashboard-scroll { flex: 1; padding: 40px; display: flex; flex-direction: column; align-items: center; overflow-y: auto; box-sizing: border-box; }
         
-        /* Ventana flotante de bienvenida exacta de la captura */
         .panel-ui-wrapper { background: rgba(18, 18, 20, 0.95); border: 1px solid #2d2d35; border-radius: 16px; padding: 35px; max-width: 850px; width: 100%; box-shadow: 0 25px 50px rgba(0,0,0,0.8); text-align: center; box-sizing: border-box; position: relative; }
         .badge-tag-early { background-color: #ffffff; color: #000000; font-size: 11px; font-weight: 900; padding: 4px 8px; border-radius: 6px; text-transform: uppercase; vertical-align: middle; margin-left: 10px; display: inline-block; transform: rotate(4deg); }
         .splash-main-text { font-size: 36px; font-weight: 800; color: #fff; margin: 0 0 20px 0; letter-spacing: -0.5px; }
         .highlight-cyan { color: #00bcff; }
 
-        /* Mosaico de rejilla de juegos superior */
         .mini-app-tiles-row { display: flex; justify-content: center; gap: 14px; margin: 25px 0; flex-wrap: wrap; }
         .app-shortcut-tile-btn { width: 70px; height: 60px; background: #1c1c1e; border-radius: 12px; overflow: hidden; cursor: pointer; border: 1px solid #2d2d35; transition: 0.2s; display: flex; align-items: center; justify-content: center; font-size: 20px; }
         .app-shortcut-tile-btn:hover { transform: translateY(-4px); border-color: #00bcff; background: #25252b; }
 
-        /* Sección Activities original */
         .dashboard-header-label { text-align: left; width: 100%; max-width: 850px; font-size: 26px; font-weight: 800; margin: 35px 0 5px 0; color: #fff; letter-spacing: -0.5px; }
         .dashboard-sub-label { text-align: left; width: 100%; max-width: 850px; color: #8a8a93; font-size: 14px; margin-bottom: 20px; }
         
@@ -55,12 +48,11 @@
         
         .element-google { background: #ffffff !important; color: #000 !important; font-size: 28px !important; font-weight: 900 !important; }
         .element-youtube { background: #ffffff !important; color: #ff0000 !important; font-size: 26px !important; font-weight: 900 !important; }
-        .element-twitch { background: #6441a5 !important; color: #fff !important; font-size: 24px !important; font-weight: 700 !important; font-family: sans-serif; }
+        .element-twitch { background: #6441a5 !important; color: #fff !important; font-size: 24px !important; font-weight: 700 !important; }
         .element-poki { background: #34a853 !important; color: #fff !important; font-size: 26px !important; font-weight: bold; }
         .element-soundcloud { background: #ff5500 !important; color: #fff !important; font-size: 20px !important; font-weight: 800; }
         .element-discord { background: #5865F2 !important; color: #fff !important; font-size: 22px !important; font-weight: bold; }
 
-        /* Contenedor del visor principal */
         .workspace-viewport-wrapper { width: 100%; max-width: 850px; border: 3px solid #202024; border-radius: 16px; overflow: hidden; background: #000; margin-top: 30px; display: none; box-shadow: 0 20px 40px rgba(0,0,0,0.8); }
         .workspace-viewport-wrapper iframe { width: 100%; height: 680px; border: none; display: block; background: #fff; }
 
@@ -68,6 +60,9 @@
         .owner-secret-panel input, .owner-secret-panel select { padding: 14px; background: #1c1c1e; border: 1px solid #2d2d35; color: #fff; border-radius: 8px; margin: 10px 0; width: 100%; box-sizing: border-box; outline: none; }
         
         .session-blocker-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #0b0b0c; z-index: 5000; display: flex; align-items: center; justify-content: center; }
+        
+        /* CORRECCIÓN VISUAL DE LA CASILLA */
+        .visible-input-field { width: 100%; padding: 16px; background: #1a1a22 !important; border: 2px solid #00bcff !important; color: #ffffff !important; border-radius: 8px; margin-bottom: 20px; box-sizing: border-box; outline: none; font-size: 16px; text-align: center; }
     </style>
     <script>
         function launchAppInsideSystem(targetUrl) {
@@ -104,6 +99,7 @@
         function processGatewayAuthorization(event) {
             event.preventDefault();
             document.getElementById('auth-session-blocker').style.display = 'none';
+            document.getElementById('main-operating-desktop').style.display = 'flex';
             
             const checkedEmail = document.getElementById('verification-email-field').value.trim().toLowerCase();
             if (checkedEmail === "y.madrid10018@gmail.com") {
@@ -114,9 +110,8 @@
 </head>
 <body>
 
-    <!-- CONTROL DE AUTORIZACIÓN INICIAL -->
+    <!-- CONTROL DE AUTORIZACIÓN INICIAL REPARADO -->
     <div id="auth-session-blocker" class="session-blocker-overlay">
         <div class="panel-ui-wrapper" style="max-width: 460px; padding: 40px 30px;">
             <div class="splash-main-text" style="font-size: 28px; margin-bottom: 10px;">Welcome to <span class="highlight-cyan">Art Class Enhanced</span></div>
-            <p style="color: #8a8a93; font-size: 14px; margin-bottom: 25px;">Introduce tu correo estudiantil para iniciar verificación de credenciales de acceso.</p>
-            <form onsubmit="processGatewayAuthorization(event)">
+            <p style="color: #8a8a93; font-size: 14px; margin-bottom: 25px;">Introduce tu correo estudiantil para iniciar verificación.</p>
